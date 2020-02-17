@@ -1,0 +1,22 @@
+Part-1
+
+JS recap
+  UI Thread, Dispatch Queue
+  Events
+Sync & Async
+setTimeout & postMessage
+JS from the UI Thread perspective
+Callbacks vs Events viz Closure
+Custom Async
+Worker Threads
+Consuming Promise
+
+Part-2
+Producing promises
+Dispatch Queue
+Async Await
+Fetch, Cache, Service Worker
+
+
+How promisded diff from obser
+touch base on closure..How to use..impact..
