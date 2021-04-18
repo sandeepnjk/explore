@@ -1,0 +1,342 @@
+- nltk  installation
+  - http://www.nltk.org
+  - http://www.nltk.org/install.html
+  - Anaconda iinstallation
+    - https://www.anaconda.com/products/individual
+
+
+- Areas to cover
+  - python - novice
+  - jupyter - novice
+  - sciPy
+  - Spyder
+  - NumPy
+  - DASK
+  - bokeh
+  - scikit  Learn
+  - TensorFlow
+  - Numba
+  - Panel
+  - pandas
+  - HoloViews
+  - PYTORCH
+  - CONDA
+  - matplotlib
+
+
+Searching Text
+ - $import nltk
+ - >>>from nltk.book import *
+ - >>>text1.concordance("xxx"): Every occurance of a word along with some context, permits us to see words in context.
+ - >>>text1.similar("xxxx"):  words that occur in a similar range of context.
+ - >>>text1.common_contexts(["monstrous", "very"]):  contexts that  are shared by 2 or more words
+ - >>>text4.dispersion_plot(["citizen", "democracy", "freedom", "duties","america"])
+
+//todo: similar() ...sounds confusing... need to understand how similar works.
+
+>>>text3.generate() : Print random text using trigram language model.
+http://www.nltk.org/api/nltk.html?highlight=generate#nltk.text.Text.generate
+#note: for some reason i get same text when repetedly called. why?
+#todo: what is ngram index??
+
+>>> len(text3)
+
+>>> set(text1)
+>>> sorted(set(text1))
+>>> len(set(text1))
+
+>>> from __future__ import division  #for python 2
+>>> len(text3) / len(set(text3))   #average occurance of each word occurs in the text
+
+
+>>> text3.count("smote") #occurance of a word in a text
+
+
+#defining functions
+>>> def lexical_diversity(text):
+...     return len(text)/len(set(text))
+... 
+>>> def percentage(count, total):
+...     return 100 * count / total
+... 
+>>> lexical_diversity(text3)
+16.050197203298673
+>>> percentage(text4.count('a'), len(text4))
+1.457973123627309
+>>> 
+
+#Lists
+>>> mySent = ["let", "the", "force", "be", "with", "you", "the", "force", "will", "guide", "you"]
+>>> len(mySent)
+11
+>>> set(mySent)
+set(['be', 'force', 'guide', 'will', 'let', 'the', 'with', 'you'])
+>>> len(set(mySent))
+8
+>>> lexical_diversity(mySent)
+1.375
+
+#add lists
+>>> sent1 + sent2
+['Call', 'me', 'Ishmael', '.', 'The', 'family', 'of', 'Dashwood', 'had', 'long', 'been', 'settled', 'in', 'Sussex', '.']
+
+>>> len(sent1 + mySent)
+15
+
+#append to list
+>>> sent2
+['The', 'family', 'of', 'Dashwood', 'had', 'long', 'been', 'settled', 'in', 'Sussex', '.']
+>>> len(sent2)
+11
+>>> sent2.append("some")
+>>> sent2
+['The', 'family', 'of', 'Dashwood', 'had', 'long', 'been', 'settled', 'in', 'Sussex', '.', 'some']
+>>> len(sent2)
+12
+
+#list index, 0 based
+>>> text4[173]
+u'awaken'
+
+>>> text3[54:173]
+[u'there', u'was', u'light', u'.', u'And', u'God', u'saw', u'the', u'light', u',', u'that', u'it', u'was', u'good', u':', u'and', u'God', u'divided', u'the', u'light', u'from', u'the', u'darkness', u'.', u'And', u'God', u'called', u'the', u'light', u'Day', u',', u'and', u'the', u'darkness', u'he', u'called', u'Night', u'.', u'And', u'the', u'evening', u'and', u'the', u'morning', u'were', u'the', u'first', u'day', u'.', u'And', u'God', u'said', u',', u'Let', u'there', u'be', u'a', u'firmament', u'in', u'the', u'midst', u'of', u'the', u'waters', u',', u'and', u'let', u'it', u'divide', u'the', u'waters', u'from', u'the', u'waters', u'.', u'And', u'God', u'made', u'the', u'firmament', u',', u'and', u'divided', u'the', u'waters', u'which', u'were', u'under', u'the', u'firmament', u'from', u'the', u'waters', u'which', u'were', u'above', u'the', u'firmame', u'and', u'it', u'was', u'so', u'.', u'And', u'God', u'called', u'the', u'firmament', u'Heaven', u'.', u'And', u'the', u'evening', u'and', u'the', u'morning', u'were', u'the', u'second']
+
+
+>>> text3[:15]
+[u'In', u'the', u'beginning', u'God', u'created', u'the', u'heaven', u'and', u'the', u'earth', u'.', u'And', u'the', u'earth', u'was']
+
+>>> len(text3)
+44764
+>>> text3[44750:]
+[u'they', u'embalmed', u'him', u',', u'and', u'he', u'was', u'put', u'in', u'a', u'coffin', u'in', u'Egypt', u'.']
+
+>>> sent1
+['Call', 'me', 'Ishmael', '.', ['let', 'the', 'force', 'be', 'with', 'you', 'the', 'force', 'will', 'guide', 'you']]
+>>> sent1[3]="Sandeep"
+>>> sent1
+['Call', 'me', 'Ishmael', 'Sandeep', ['let', 'the', 'force', 'be', 'with', 'you', 'the', 'force', 'will', 'guide', 'you']]
+
+
+#variables
+>>> vocab = set(text1)
+>>> vocab_size = len(vocab)
+
+>>> name="pompeo"
+>>> name[3]
+'p'
+>>> name[:4]
+'pomp'
+
+# join() and split()
+>>> tmpName = ''.join(['jonty', 'rodes'])
+>>> tmpName
+'jontyrodes'
+>>> 
+>>> tmpName = ' '.join(['jonty', 'rodes'])
+>>> tmpName
+'jonty rodes'
+>>> tmpNameSplit = tmpName.split(' ')
+>>> tmpNameSplit
+['jonty', 'rodes']
+
+
+# Frequency Distribution - top 50 words in moby dick book
+>>> fdist1 = FreqDist(text1)
+>>> vocabulary1 = fdist1.keys()
+>>> vocabulary1[:50]
+[u'funereal', u'unscientific', u'divinely', u'foul', u'four', u'gag', u'prefix', u'woods', u'clotted', u'Duck', u'hanging', u'plaudits', u'woody', u'Until', u'marching', u'disobeying', u'canes', u'granting', u'advantage', u'Westers', u'insertion', u'DRYDEN', u'formless', u'Untried', u'superficially', u'Western', u'portentous', u'beacon', u'meadows', u'sinking', u'Ding', u'Spurn', u'treasuries', u'churned', u'oceans', u'powders', u'tinkerings', u'tantalizing', u'yellow', u'bolting', u'uncertain', u'stabbed', u'bringing', u'elevations', u'ferreting', u'believers', u'wooded', u'songster', u'uttering', u'scholar']
+>>> fdist1['whale']
+906
+
+# Plot the frequency distribution
+>>> type(fdist1)
+<class 'nltk.probability.FreqDist'>
+>>> fdist1.plot(50, cumulative=True)
+<matplotlib.axes._subplots.AxesSubplot object at 0x7fcf6f36b910>
+
+
+# Hapaxes - words that occur once in the corpus
+>>> fdist1.hapaxes()
+
+
+# Fine grained selection of words
+
+# getting long words, > 15
+>>> V = set(text1)
+>>> long_words =  [w for w in V if len(w) > 15]
+>>> sorted(long_words)
+# gettin words > 7 with a frequency > 7
+fdist5 = FreqDist(text5)
+>>> sorted(w for w in set(text5) if len(w) > 7 and fdist5[w] > 7)
+
+
+#Collocations and bigrams
+collocations - sequence of words that occur together
+bigrams - list of word pairs
+
+
+>>> bigrams(["more", "is","said","than","done"])
+>>> text8.collocation() #for some reason get error ...instead use collocation_list
+>>> text8.collocation_list()
+
+>>> [len(w) for w in text1]
+
+
+>>> fdist =  FreqDist([len(w) for w in text1])
+>>> fdist
+FreqDist({3: 50223, 1: 47933, 4: 42345, 2: 38513, 5: 26597, 6: 17111, 7: 14399, 8: 9966, 9: 6428, 10: 3528, ...})
+>>> fdist.items()
+[(1, 47933), (2, 38513), (3, 50223), (4, 42345), (5, 26597), (6, 17111), (7, 14399), (8, 9966), (9, 6428), (10, 3528), (11, 1873), (12, 1053), (13, 567), (14, 177), (15, 70), (16, 22), (17, 12), (18, 1), (20, 1)]
+>>> fdist.max()
+3
+>>> fdist[3]
+50223
+>>> fdist.freq(3)
+0.19255882431878046
+
+
+##operations of FreqDist
+fdist = FreqDist(text1) - create a freq dist using the given samples
+fdist.inc("monstrous") - increment the count for this sample
+fdist["monstrous"] - count of number of times this sample occured
+fdist.freq("monstrous") - frequency of this samples in the samples
+fdist.N() - Total number of the samples
+fdist.keys() - samples sorted in the order of decresing frequency.
+for sample in fdist - Iterate over samples in the order of decreasing frequency.
+fdist.max() - Sample with the greatest count
+fdist.tabulate() - tabulate the frequency distribution
+fdist.plot() - Graphical plot of the frequency distribution
+fdist.plot(cumulative=True) - Cumulative plot of the frequency dist
+fdist1 < fdist2 - test if samples in one occure less fequently than other
+
+
+
+##word comparison operators
+
+s.startswith(t)
+s.endswith(t)
+t in s - test if t is contained in s
+s.islower()
+s.isupper()
+s.isalpha()
+s.isalnum()
+s.isdigit()
+s.istitle() - Test if it is a title case
+
+[w for w in text1 if condition]
+
+>>> [len(w) for w in text1 if w.istitle]
+>>> [w for w in text1 if len(w) == 5]
+>>> sorted(w for w in text1 if w.endswith("ableness"))
+
+
+# Automatic Language Understanding
+Word Sense Disambiguation
+     serve:help with food or drink; hold an office; put ball into play;
+     dish: plate; course of a meal; communication device;
+     'He served the dish'
+
+     interpreting the meaning of 'by'
+     "The lost children were found by the searchers" (agentive)
+     "The lost children were found by the mountain" (locative)
+     "The lost children were found by the afternoon" (temporal)
+     
+Pronoun Resolution
+    "The thieves stole the painting. They were subsequently sold."
+    "The thieves stole the painting. They were subsequently caught."
+    "The thieves stole the painting. They were subsequently found."
+
+    Finding the correct antecedent of the pronoun 'they'
+
+    Computational Techniques Used
+    -  Anaphora Resolution
+    -  Semantic, Role labeling
+
+
+
+Generating Language Output - correct translation - specific to the language
+
+Machine Translation
+translate multiple times eng to ger to eng to ger..... 
+>>>babelize_shell() #doesnot work it removed...
+
+
+
+chap-1
+
+
+
+15.
+>>> sorted(set([w for w in text5 if w.startswith('b')]))
+
+
+17.
+' '.join(text9[621:644])
+
+18.
+>>> sorted(set(list(set([w.lower() for w in set(sent1)])) + list(set([w.lower() for w in set(sent2)])) + list(set([w.lower() for w in set(sent3)])) + list(set([w.lower() for w in set(sent4)])) + list(set([w.lower() for w in set(sent5)])) + list(set([w.lower() for w in set(sent6)])) + list(set([w.lower() for w in set(sent7)])) + list(set([w.lower() for w in set(sent8)])) + list(set([w.lower() for w in set(sent9)]))))
+
+
+21.
+>>> tokens = [w for w in text1 if w.isalpha()]
+>>> tokens[len(tokens)-2:len(tokens)]
+[u'another', u'orphan']
+
+23.
+>>> words6 = [w for w in text6 if w.isupper() and w.isalpha()]
+>>> for w in words6:
+...     print w
+...
+
+24.
+>>> [w for w in text6 if w.endswith('ize')]
+[]
+>>> [w for w in text6 if 'z' in w]
+[u'zone', u'amazes', u'Fetchez', u'Fetchez', u'zoop', u'zoo', u'zhiv', u'frozen', u'zoosh']
+>>> [w for w in text6 if 'pt' in w]
+[u'empty', u'aptly', u'Thpppppt', u'Thppt', u'Thppt', u'empty', u'Thppppt', u'temptress', u'temptation', u'ptoo', u'Chapter', u'excepting', u'Thpppt']
+
+
+25.
+>>> sent = ['she', 'sells', 'sea', 'shells', 'by', 'the', 'sea', 'shore']
+>>> for w in sent:
+...     if(w.startswith('sh')):
+...             print w,
+... 
+she shells shore
+
+>>> for w in sent:
+...     if(len(w) > 4):
+...             print w,
+... 
+sells shells shore
+
+
+26.
+sum([len(w) for w in text1])
+999044
+
+>>> sum([len(w) for w in text1])/len(text1)
+3
+
+27.
+>>> def vocab_size(text):
+...     words = list(set([w.lower() for w in text]))
+...     words_alpha = [w for w in words if w.isalpha()]
+...     return len(words_alpha)
+... 
+>>> vocab_size(text1)
+16948
+>>> vocab_size(text2)
+6283
+>>> vocab_size(text3)
+2615
+
+
+28.
+>>> def percent(word, text):
+...     fdist = FreqDist(text)
+...     return fdist.freq(word) * 100
+... 
+
+29.

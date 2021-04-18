@@ -1,0 +1,10 @@
+/Users/sandeep_nanajkar/sn-workspace/explore/cs8dotnetcore3-sn/chapter02/Arrays/bin/Debug/netcoreapp3.0/Arrays.deps.json
+/Users/sandeep_nanajkar/sn-workspace/explore/cs8dotnetcore3-sn/chapter02/Arrays/bin/Debug/netcoreapp3.0/Arrays.runtimeconfig.json
+/Users/sandeep_nanajkar/sn-workspace/explore/cs8dotnetcore3-sn/chapter02/Arrays/bin/Debug/netcoreapp3.0/Arrays.runtimeconfig.dev.json
+/Users/sandeep_nanajkar/sn-workspace/explore/cs8dotnetcore3-sn/chapter02/Arrays/bin/Debug/netcoreapp3.0/Arrays.dll
+/Users/sandeep_nanajkar/sn-workspace/explore/cs8dotnetcore3-sn/chapter02/Arrays/bin/Debug/netcoreapp3.0/Arrays.pdb
+/Users/sandeep_nanajkar/sn-workspace/explore/cs8dotnetcore3-sn/chapter02/Arrays/obj/Debug/netcoreapp3.0/Arrays.csprojAssemblyReference.cache
+/Users/sandeep_nanajkar/sn-workspace/explore/cs8dotnetcore3-sn/chapter02/Arrays/obj/Debug/netcoreapp3.0/Arrays.AssemblyInfoInputs.cache
+/Users/sandeep_nanajkar/sn-workspace/explore/cs8dotnetcore3-sn/chapter02/Arrays/obj/Debug/netcoreapp3.0/Arrays.AssemblyInfo.cs
+/Users/sandeep_nanajkar/sn-workspace/explore/cs8dotnetcore3-sn/chapter02/Arrays/obj/Debug/netcoreapp3.0/Arrays.dll
+/Users/sandeep_nanajkar/sn-workspace/explore/cs8dotnetcore3-sn/chapter02/Arrays/obj/Debug/netcoreapp3.0/Arrays.pdb

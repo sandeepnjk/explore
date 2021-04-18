@@ -1,0 +1,10 @@
+/Users/sandeep_nanajkar/sn-workspace/explore/cs8dotnetcore3-sn/chapter01/HelloCS/bin/Debug/netcoreapp3.1/HelloCS.deps.json
+/Users/sandeep_nanajkar/sn-workspace/explore/cs8dotnetcore3-sn/chapter01/HelloCS/bin/Debug/netcoreapp3.1/HelloCS.runtimeconfig.json
+/Users/sandeep_nanajkar/sn-workspace/explore/cs8dotnetcore3-sn/chapter01/HelloCS/bin/Debug/netcoreapp3.1/HelloCS.runtimeconfig.dev.json
+/Users/sandeep_nanajkar/sn-workspace/explore/cs8dotnetcore3-sn/chapter01/HelloCS/bin/Debug/netcoreapp3.1/HelloCS.dll
+/Users/sandeep_nanajkar/sn-workspace/explore/cs8dotnetcore3-sn/chapter01/HelloCS/bin/Debug/netcoreapp3.1/HelloCS.pdb
+/Users/sandeep_nanajkar/sn-workspace/explore/cs8dotnetcore3-sn/chapter01/HelloCS/obj/Debug/netcoreapp3.1/HelloCS.csprojAssemblyReference.cache
+/Users/sandeep_nanajkar/sn-workspace/explore/cs8dotnetcore3-sn/chapter01/HelloCS/obj/Debug/netcoreapp3.1/HelloCS.AssemblyInfoInputs.cache
+/Users/sandeep_nanajkar/sn-workspace/explore/cs8dotnetcore3-sn/chapter01/HelloCS/obj/Debug/netcoreapp3.1/HelloCS.AssemblyInfo.cs
+/Users/sandeep_nanajkar/sn-workspace/explore/cs8dotnetcore3-sn/chapter01/HelloCS/obj/Debug/netcoreapp3.1/HelloCS.dll
+/Users/sandeep_nanajkar/sn-workspace/explore/cs8dotnetcore3-sn/chapter01/HelloCS/obj/Debug/netcoreapp3.1/HelloCS.pdb

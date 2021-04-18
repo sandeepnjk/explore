@@ -1,0 +1,10 @@
+/Users/sandeep_nanajkar/sn-workspace/explore/cs8dotnetcore3-sn/chapter02/Variables/bin/Debug/netcoreapp3.0/Variables.deps.json
+/Users/sandeep_nanajkar/sn-workspace/explore/cs8dotnetcore3-sn/chapter02/Variables/bin/Debug/netcoreapp3.0/Variables.runtimeconfig.json
+/Users/sandeep_nanajkar/sn-workspace/explore/cs8dotnetcore3-sn/chapter02/Variables/bin/Debug/netcoreapp3.0/Variables.runtimeconfig.dev.json
+/Users/sandeep_nanajkar/sn-workspace/explore/cs8dotnetcore3-sn/chapter02/Variables/bin/Debug/netcoreapp3.0/Variables.dll
+/Users/sandeep_nanajkar/sn-workspace/explore/cs8dotnetcore3-sn/chapter02/Variables/bin/Debug/netcoreapp3.0/Variables.pdb
+/Users/sandeep_nanajkar/sn-workspace/explore/cs8dotnetcore3-sn/chapter02/Variables/obj/Debug/netcoreapp3.0/Variables.csprojAssemblyReference.cache
+/Users/sandeep_nanajkar/sn-workspace/explore/cs8dotnetcore3-sn/chapter02/Variables/obj/Debug/netcoreapp3.0/Variables.AssemblyInfoInputs.cache
+/Users/sandeep_nanajkar/sn-workspace/explore/cs8dotnetcore3-sn/chapter02/Variables/obj/Debug/netcoreapp3.0/Variables.AssemblyInfo.cs
+/Users/sandeep_nanajkar/sn-workspace/explore/cs8dotnetcore3-sn/chapter02/Variables/obj/Debug/netcoreapp3.0/Variables.dll
+/Users/sandeep_nanajkar/sn-workspace/explore/cs8dotnetcore3-sn/chapter02/Variables/obj/Debug/netcoreapp3.0/Variables.pdb

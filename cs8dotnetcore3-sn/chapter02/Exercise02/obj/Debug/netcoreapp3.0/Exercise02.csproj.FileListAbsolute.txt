@@ -1,0 +1,10 @@
+/Users/sandeep_nanajkar/sn-workspace/explore/cs8dotnetcore3-sn/chapter02/Exercise02/bin/Debug/netcoreapp3.0/Exercise02.deps.json
+/Users/sandeep_nanajkar/sn-workspace/explore/cs8dotnetcore3-sn/chapter02/Exercise02/bin/Debug/netcoreapp3.0/Exercise02.runtimeconfig.json
+/Users/sandeep_nanajkar/sn-workspace/explore/cs8dotnetcore3-sn/chapter02/Exercise02/bin/Debug/netcoreapp3.0/Exercise02.runtimeconfig.dev.json
+/Users/sandeep_nanajkar/sn-workspace/explore/cs8dotnetcore3-sn/chapter02/Exercise02/bin/Debug/netcoreapp3.0/Exercise02.dll
+/Users/sandeep_nanajkar/sn-workspace/explore/cs8dotnetcore3-sn/chapter02/Exercise02/bin/Debug/netcoreapp3.0/Exercise02.pdb
+/Users/sandeep_nanajkar/sn-workspace/explore/cs8dotnetcore3-sn/chapter02/Exercise02/obj/Debug/netcoreapp3.0/Exercise02.csprojAssemblyReference.cache
+/Users/sandeep_nanajkar/sn-workspace/explore/cs8dotnetcore3-sn/chapter02/Exercise02/obj/Debug/netcoreapp3.0/Exercise02.AssemblyInfoInputs.cache
+/Users/sandeep_nanajkar/sn-workspace/explore/cs8dotnetcore3-sn/chapter02/Exercise02/obj/Debug/netcoreapp3.0/Exercise02.AssemblyInfo.cs
+/Users/sandeep_nanajkar/sn-workspace/explore/cs8dotnetcore3-sn/chapter02/Exercise02/obj/Debug/netcoreapp3.0/Exercise02.dll
+/Users/sandeep_nanajkar/sn-workspace/explore/cs8dotnetcore3-sn/chapter02/Exercise02/obj/Debug/netcoreapp3.0/Exercise02.pdb

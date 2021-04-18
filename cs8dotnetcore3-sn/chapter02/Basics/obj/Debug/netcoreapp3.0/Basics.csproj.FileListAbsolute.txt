@@ -1,0 +1,10 @@
+/Users/sandeep_nanajkar/sn-workspace/explore/cs8dotnetcore3-sn/chapter02/Basics/obj/Debug/netcoreapp3.0/Basics.csprojAssemblyReference.cache
+/Users/sandeep_nanajkar/sn-workspace/explore/cs8dotnetcore3-sn/chapter02/Basics/obj/Debug/netcoreapp3.0/Basics.AssemblyInfoInputs.cache
+/Users/sandeep_nanajkar/sn-workspace/explore/cs8dotnetcore3-sn/chapter02/Basics/obj/Debug/netcoreapp3.0/Basics.AssemblyInfo.cs
+/Users/sandeep_nanajkar/sn-workspace/explore/cs8dotnetcore3-sn/chapter02/Basics/bin/Debug/netcoreapp3.0/Basics.deps.json
+/Users/sandeep_nanajkar/sn-workspace/explore/cs8dotnetcore3-sn/chapter02/Basics/bin/Debug/netcoreapp3.0/Basics.runtimeconfig.json
+/Users/sandeep_nanajkar/sn-workspace/explore/cs8dotnetcore3-sn/chapter02/Basics/bin/Debug/netcoreapp3.0/Basics.runtimeconfig.dev.json
+/Users/sandeep_nanajkar/sn-workspace/explore/cs8dotnetcore3-sn/chapter02/Basics/bin/Debug/netcoreapp3.0/Basics.dll
+/Users/sandeep_nanajkar/sn-workspace/explore/cs8dotnetcore3-sn/chapter02/Basics/bin/Debug/netcoreapp3.0/Basics.pdb
+/Users/sandeep_nanajkar/sn-workspace/explore/cs8dotnetcore3-sn/chapter02/Basics/obj/Debug/netcoreapp3.0/Basics.dll
+/Users/sandeep_nanajkar/sn-workspace/explore/cs8dotnetcore3-sn/chapter02/Basics/obj/Debug/netcoreapp3.0/Basics.pdb
