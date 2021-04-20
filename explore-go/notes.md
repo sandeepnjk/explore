@@ -185,3 +185,52 @@
       fmt.Println(message)
 }
     ```
+- Go _slice_ type
+  - [Slice Intro](https://blog.golang.org/slices-intro)
+  - Slice is analogous to Array, but have unusual properties
+    - A slice contains a pointer, length, capacity
+    - The pointer points to a underlying Array
+  - Creating a slice, similar to array, but no specified length
+    ```go
+    //creating array
+    a := [2]string{"Captain", "Haddock"}
+
+    //creating slice
+    letters := []string{"a","b","c","d"}
+
+    //creating slice usning built-in function 'make'
+    //func make([]T, len, cap) []T
+    var s []byte
+    s = make([]byte, 5, 5)
+    //s == []byte{0, 0, 0, 0, 0}
+    //more succintly, s = make([]byte, 5)
+    ```
+    - if _capacity_ arg is omitted it defaults to the specified length.
+  - Slice Internals
+    - ![Slice Structure](./notes-images/slice-struct.png)
+    - `s = make([]byte, 5)`
+      ![Slice Internal](./notes-images/slice-1.png)
+    - Slicing does not the slice's data, new slice that points to original array
+      - `s = s[2:4]`
+        ![Slicing Internal](./notes-images/slice-2.png)
+        ```go
+        d := []byte{'r', 'o', 'a', 'd'}
+        e := d[2:]
+        // e == []byte{'a', 'd'}
+        e[1] = 'm'
+        // e == []byte{'a', 'm'}
+        // d == []byte{'r', 'o', 'a', 'm'}
+        ```
+    - Grow the slice capacity
+      - using `func copy(dst, src, []T) int`
+      ```go
+      var s []byte
+      s = make([]byte, 5, 5)
+      s = s[2:4]
+
+      //double the capacity of s
+      t := make([]byte, len(s), (cap(s)+1)*2)
+      copy(t, s)
+      s = t
+      ```
+
