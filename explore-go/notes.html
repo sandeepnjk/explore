@@ -1,0 +1,823 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<title>notes.html</title>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+
+</head>
+
+<body>
+
+<h1 id="installation">Installation</h1>
+<ul>
+<li><a href="https://golang.org/doc/tutorial/getting-started">Tutorial Ref:</a></li>
+<li><a href="https://golang.org/dl/">Download from golang.org</a></li>
+<li><a href="https://marketplace.visualstudio.com/items?itemName=golang.go">Visual Code Plugin</a>
+<ul>
+<li>Code &gt; Preferences &gt; Extensions &gt; Go 0.24.1</li>
+<li>After install, VS Code will ask to install tools, install all</li>
+<li>(VS Studio Code extensions Commands)[https://github.com/golang/vscode-go/blob/master/docs/commands.md#commands]</li>
+</ul></li>
+</ul>
+<h1 id="hello-world-program">Hello World Program</h1>
+<ul>
+<li><code>shell script   cd ~/sn-workspace/explore/explore-go   mkdir hello   cd hello</code></li>
+<li>Enabling dependency tracking
+<ul>
+<li>importing packages contained in other modules</li>
+<li>Enable dependency tracking by creating a <code>go.mod</code> file
+<ul>
+<li><p><code>shell script   go mod init example.com/hello</code></p>
+<pre class="text"><code>go: creating new go.mod: module example.com/hello  </code></pre></li>
+</ul></li>
+<li>sample program
+<ul>
+<li><div class="sourceCode" id="cb2"><pre class="sourceCode go"><code class="sourceCode go"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">package</span> main</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="kw">import</span> <span class="st">&quot;fmt&quot;</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="kw">func</span> main<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  fmt<span class="op">.</span>Println<span class="op">(</span><span class="st">&quot;Hello World!&quot;</span><span class="op">)</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div></li>
+<li><code>import "fmt"</code> is a standard text format package, including printing to console.</li>
+</ul></li>
+<li>to run <code>go run .</code></li>
+<li><code>go help</code></li>
+</ul></li>
+</ul>
+<h2 id="importing-packages-from-published-modules">Importing packages from published modules</h2>
+<ul>
+<li><a href="https://pkg.go.dev/">Search for packages in pkg.go.dev</a></li>
+<li>adding ‘rsc.io/quote’ package <code>import "rec.io/quote"</code> and run <code>go mod tidy</code>
+<ul>
+<li><code>go     package main     import (       "fmt"       "rsc.io/quote"     )     func main() {       fmt.Println(quote.Go())     }</code></li>
+<li><code>shell script     go mod tidy     go: finding module for package rsc.io/quote     go: found rsc.io/quote in rsc.io/quote v1.5.2</code></li>
+<li>Run <code>go mod tidy</code>, to locate and download the rsc.io/quote module that contains the package you imported. By default, it downloads the latest version<br />
+</li>
+<li><code>shell script     go run .     Don't communicate by sharing memory, share memory by communicating.</code></li>
+</ul></li>
+<li>Create a module example.com/greetings
+<ul>
+<li><code>go mod init example.com/greetings</code></li>
+<li><div class="sourceCode" id="cb3"><pre class="sourceCode go"><code class="sourceCode go"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>  <span class="kw">package</span> greetings</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">import</span> <span class="op">(</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>      <span class="st">&quot;fmt&quot;</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="op">)</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>  <span class="kw">func</span> Hello<span class="op">(</span>name <span class="dt">string</span><span class="op">)</span> <span class="dt">string</span> <span class="op">{</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>      message <span class="op">:=</span> fmt<span class="op">.</span>Sprintf<span class="op">(</span><span class="st">&quot;Hi, %v. Welcome!&quot;</span><span class="op">,</span> name<span class="op">)</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>      <span class="kw">return</span> message</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span></code></pre></div></li>
+<li>import the <code>example.com/greetings</code> in <code>hello.go</code>
+<ul>
+<li><div class="sourceCode" id="cb4"><pre class="sourceCode go"><code class="sourceCode go"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>  <span class="kw">package</span> main</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="kw">import</span> <span class="op">(</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;example.com/greetings&quot;</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;fmt&quot;</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    <span class="co">//&quot;rsc.io/quote&quot;</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>  <span class="op">)</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="kw">func</span> main<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>    <span class="co">//fmt.Println(quote.Go())</span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>    message <span class="op">:=</span> greetings<span class="op">.</span>Hello<span class="op">(</span><span class="st">&quot;Rambo&quot;</span><span class="op">)</span></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>    fmt<span class="op">.</span>Println<span class="op">(</span>message<span class="op">)</span></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div></li>
+<li><code>example.com/greetings</code> is not in <em>pkg.go.dev</em> but local. we need to fix this
+<ul>
+<li><code>go mod edit -replace=example.com/greetings=../greetings</code>
+<ul>
+<li>a replace directive is added in <code>go.mod</code></li>
+</ul></li>
+<li><div class="sourceCode" id="cb5"><pre class="sourceCode mod"><code class="sourceCode modula2"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>module example.com/hello</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>go <span class="dv">1.16</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>replace example.com/greetings =&gt; ../greetings</span></code></pre></div></li>
+<li>synchronize the dependencies in the hello module using …
+<ul>
+<li><code>shell script   go mod tidy   go: found example.com/greetings in example.com/greetings v0.0.0-00010101000000-000000000000</code></li>
+</ul></li>
+<li>updated <code>go.mod</code> file
+<ul>
+<li><code>go mod tidy</code> find the local code in the greetings directory</li>
+<li>then adds a requires directive to specify <em>example.com/hello requires example.com/greetings</em></li>
+<li>a <em>pseudo_version_number</em> is generated and tagged in the end to the requires directive</li>
+<li><div class="sourceCode" id="cb6"><pre class="sourceCode go"><code class="sourceCode go"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>module example<span class="op">.</span>com<span class="op">/</span>hello</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="kw">go</span> <span class="dv">1</span><span class="fl">.16</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>require example<span class="op">.</span>com<span class="op">/</span>greetings v0<span class="op">.</span><span class="dv">0</span><span class="fl">.0</span><span class="dv">-00010101000000-000000000000</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>replace example<span class="op">.</span>com<span class="op">/</span>greetings <span class="op">=&gt;</span> <span class="op">../</span>greetings</span></code></pre></div></li>
+</ul></li>
+</ul></li>
+<li><code>shell script   cd hello   go run .   Hi, Rambo. Welcome!</code></li>
+</ul></li>
+</ul></li>
+<li>Issue encountered in VS Studio Code
+<ul>
+<li>imports were getting deleted on save.</li>
+<li>issue: on save format code happens and since its no able to resolve the import it gets deleted. (think is a VS Code bug)</li>
+<li>Hack:Code &gt; Preferences &gt; Settings &gt; extensions &gt; go &gt; search “codeActionsOnSave” &gt; edit in settings.json
+<ul>
+<li><div class="sourceCode" id="cb7"><pre class="sourceCode json"><code class="sourceCode json"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>  <span class="fu">{</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&quot;folders&quot;</span><span class="fu">:</span> <span class="ot">[</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>          <span class="fu">{</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>              <span class="dt">&quot;path&quot;</span><span class="fu">:</span> <span class="st">&quot;explore-go&quot;</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>          <span class="fu">}</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>      <span class="ot">]</span><span class="fu">,</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&quot;settings&quot;</span><span class="fu">:</span> <span class="fu">{</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>          <span class="dt">&quot;go.formatTool&quot;</span><span class="fu">:</span> <span class="st">&quot;gofmt&quot;</span><span class="fu">,</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>          <span class="dt">&quot;[go]&quot;</span><span class="fu">:</span> <span class="fu">{</span></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>              <span class="dt">&quot;editor.insertSpaces&quot;</span><span class="fu">:</span> <span class="kw">false</span><span class="fu">,</span></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>              <span class="dt">&quot;editor.formatOnSave&quot;</span><span class="fu">:</span> <span class="kw">true</span><span class="fu">,</span></span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>              <span class="dt">&quot;editor.codeActionsOnSave&quot;</span><span class="fu">:</span> <span class="fu">{</span></span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>                  <span class="dt">&quot;source.organizeImports&quot;</span><span class="fu">:</span> <span class="kw">false</span></span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>              <span class="fu">}</span></span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>          <span class="fu">}</span></span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>      <span class="fu">}</span></span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">}</span></span></code></pre></div></li>
+</ul></li>
+<li>ref: https://stackoverflow.com/questions/48124565/why-does-vscode-delete-golang-source-on-save</li>
+</ul></li>
+</ul>
+<h2 id="return-and-handle-error">Return and Handle Error</h2>
+<ul>
+<li><p><a href="https://golang.org/doc/effective_go#multiple-returns">multiple <strong>return</strong> values</a></p></li>
+<li><p>return error in <em>greetings.go</em></p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode go"><code class="sourceCode go"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="kw">package</span> greetings</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="kw">import</span> <span class="op">(</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;errors&quot;</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;fmt&quot;</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="op">)</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="kw">func</span> Hello<span class="op">(</span>name <span class="dt">string</span><span class="op">)</span> <span class="op">(</span><span class="dt">string</span><span class="op">,</span> <span class="dt">error</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>  <span class="kw">if</span> name <span class="op">==</span> <span class="st">&quot;&quot;</span> <span class="op">{</span></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>    <span class="kw">return</span> <span class="st">&quot;&quot;</span><span class="op">,</span> errors<span class="op">.</span>New<span class="op">(</span><span class="st">&quot;empty name&quot;</span><span class="op">)</span></span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>  message <span class="op">:=</span> fmt<span class="op">.</span>Sprintf<span class="op">(</span><span class="st">&quot;Hi, %v. Welcome!&quot;</span><span class="op">,</span> name<span class="op">)</span></span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>  <span class="kw">return</span> message<span class="op">,</span> <span class="ot">nil</span></span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div></li>
+<li><p>handle error in <em>hello.go</em>, using <em>log</em> package</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode go"><code class="sourceCode go"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="kw">package</span> main</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="kw">import</span> <span class="op">(</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;example.com/greetings&quot;</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;fmt&quot;</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;log&quot;</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>  <span class="co">//&quot;rsc.io/quote&quot;</span></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a><span class="op">)</span></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a><span class="kw">func</span> main<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>  <span class="co">//fmt.Println(quote.Go())</span></span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>  log<span class="op">.</span>SetPrefix<span class="op">(</span><span class="st">&quot;greetings: &quot;</span><span class="op">)</span></span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>  <span class="co">//log.SetFlags(0)</span></span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>  message<span class="op">,</span> err <span class="op">:=</span> greetings<span class="op">.</span>Hello<span class="op">(</span><span class="st">&quot;&quot;</span><span class="op">)</span></span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a>  <span class="kw">if</span> err <span class="op">!=</span> <span class="ot">nil</span> <span class="op">{</span></span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a>    log<span class="op">.</span>Fatal<span class="op">(</span>err<span class="op">)</span></span>
+<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
+<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a>  fmt<span class="op">.</span>Println<span class="op">(</span>message<span class="op">)</span></span>
+<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div></li>
+</ul>
+<h2 id="go-slice-type">Go <em>slice</em> type</h2>
+<ul>
+<li><p><a href="https://blog.golang.org/slices-intro">Slice Intro</a></p></li>
+<li><p>Slice is analogous to Array, but have unusual properties</p>
+<ul>
+<li>A slice contains a pointer, length, capacity</li>
+<li>The pointer points to a underlying Array</li>
+</ul></li>
+<li><p>Creating a slice, similar to array, but no specified length</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode go"><code class="sourceCode go"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co">//creating array</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>a <span class="op">:=</span> <span class="op">[</span><span class="dv">2</span><span class="op">]</span><span class="dt">string</span><span class="op">{</span><span class="st">&quot;Captain&quot;</span><span class="op">,</span> <span class="st">&quot;Haddock&quot;</span><span class="op">}</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="co">//creating slice</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>letters <span class="op">:=</span> <span class="op">[]</span><span class="dt">string</span><span class="op">{</span><span class="st">&quot;a&quot;</span><span class="op">,</span><span class="st">&quot;b&quot;</span><span class="op">,</span><span class="st">&quot;c&quot;</span><span class="op">,</span><span class="st">&quot;d&quot;</span><span class="op">}</span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="co">//creating slice usning built-in function &#39;make&#39;</span></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a><span class="co">//func make([]T, len, cap) []T</span></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a><span class="kw">var</span> s <span class="op">[]</span><span class="dt">byte</span></span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>s <span class="op">=</span> <span class="bu">make</span><span class="op">([]</span><span class="dt">byte</span><span class="op">,</span> <span class="dv">5</span><span class="op">,</span> <span class="dv">5</span><span class="op">)</span></span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a><span class="co">//s == []byte{0, 0, 0, 0, 0}</span></span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a><span class="co">//more succintly, s = make([]byte, 5)</span></span></code></pre></div>
+<ul>
+<li>if <em>capacity</em> arg is omitted it defaults to the specified length.</li>
+</ul></li>
+<li><p>Slice Internals</p>
+<ul>
+<li><img src="./notes-images/slice-struct.png" title="fig:" alt="Slice Structure" /></li>
+<li><code>s = make([]byte, 5)</code> <img src="./notes-images/slice-1.png" alt="Slice Internal" /></li>
+<li>Slicing does not the slice’s data, new slice that points to original array
+<ul>
+<li><p><code>s = s[2:4]</code> <img src="./notes-images/slice-2.png" alt="Slicing Internal" /></p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode go"><code class="sourceCode go"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>d <span class="op">:=</span> <span class="op">[]</span><span class="dt">byte</span><span class="op">{</span><span class="ch">&#39;r&#39;</span><span class="op">,</span> <span class="ch">&#39;o&#39;</span><span class="op">,</span> <span class="ch">&#39;a&#39;</span><span class="op">,</span> <span class="ch">&#39;d&#39;</span><span class="op">}</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>e <span class="op">:=</span> d<span class="op">[</span><span class="dv">2</span><span class="op">:]</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="co">// e == []byte{&#39;a&#39;, &#39;d&#39;}</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>e<span class="op">[</span><span class="dv">1</span><span class="op">]</span> <span class="op">=</span> <span class="ch">&#39;m&#39;</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="co">// e == []byte{&#39;a&#39;, &#39;m&#39;}</span></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a><span class="co">// d == []byte{&#39;r&#39;, &#39;o&#39;, &#39;a&#39;, &#39;m&#39;}</span></span></code></pre></div></li>
+</ul></li>
+<li>Grow the slice capacity
+<ul>
+<li><p>using <code>func copy(dst, src, []T) int</code></p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode go"><code class="sourceCode go"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="kw">var</span> s <span class="op">[]</span><span class="dt">byte</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>s <span class="op">=</span> <span class="bu">make</span><span class="op">([]</span><span class="dt">byte</span><span class="op">,</span> <span class="dv">5</span><span class="op">,</span> <span class="dv">5</span><span class="op">)</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>s <span class="op">=</span> s<span class="op">[</span><span class="dv">2</span><span class="op">:</span><span class="dv">4</span><span class="op">]</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="co">//double the capacity of s</span></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>t <span class="op">:=</span> <span class="bu">make</span><span class="op">([]</span><span class="dt">byte</span><span class="op">,</span> <span class="bu">len</span><span class="op">(</span>s<span class="op">),</span> <span class="op">(</span><span class="bu">cap</span><span class="op">(</span>s<span class="op">)+</span><span class="dv">1</span><span class="op">)*</span><span class="dv">2</span><span class="op">)</span></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a><span class="bu">copy</span><span class="op">(</span>t<span class="op">,</span> s<span class="op">)</span></span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>s <span class="op">=</span> t</span></code></pre></div></li>
+</ul></li>
+</ul></li>
+</ul>
+<h2 id="using-map">Using <code>map</code></h2>
+<ul>
+<li><p>return and store the random message for a list of names</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode go"><code class="sourceCode go"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="kw">func</span> Hellos<span class="op">(</span>names <span class="op">[]</span><span class="dt">string</span><span class="op">)</span> <span class="op">(</span><span class="kw">map</span><span class="op">[</span><span class="dt">string</span><span class="op">]</span><span class="dt">string</span><span class="op">,</span> <span class="dt">error</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  messages <span class="op">:=</span> <span class="bu">make</span><span class="op">(</span><span class="kw">map</span><span class="op">[</span><span class="dt">string</span><span class="op">]</span><span class="dt">string</span><span class="op">)</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  <span class="kw">for</span> _<span class="op">,</span> name <span class="op">:=</span> <span class="kw">range</span> names <span class="op">{</span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>    message<span class="op">,</span> err <span class="op">:=</span> Hello<span class="op">(</span>name<span class="op">)</span></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>    <span class="kw">if</span> err <span class="op">!=</span> <span class="ot">nil</span> <span class="op">{</span></span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>      <span class="kw">return</span> <span class="ot">nil</span><span class="op">,</span> err</span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>    messages<span class="op">[</span>name<span class="op">]</span> <span class="op">=</span> message</span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>  <span class="kw">return</span> messages<span class="op">,</span> <span class="ot">nil</span></span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div></li>
+</ul>
+<h2 id="adding-unit-test">Adding Unit Test</h2>
+<ul>
+<li><p><em>go</em>’s built in support for unit testing.</p></li>
+<li><p><code>import "testing"</code></p></li>
+<li><p>add <code>greetings_test.go</code> in the same package</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode go"><code class="sourceCode go"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="kw">package</span> greetings</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="kw">import</span> <span class="op">(</span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;regexp&quot;</span></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;testing&quot;</span></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a><span class="op">)</span></span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a><span class="kw">func</span> TestHelloName<span class="op">(</span>t <span class="op">*</span>testing<span class="op">.</span>T<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>  name <span class="op">:=</span> <span class="st">&quot;foobar&quot;</span></span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>  want <span class="op">:=</span> regexp<span class="op">.</span>MustCompile<span class="op">(</span><span class="st">`</span><span class="ch">\b</span><span class="st">`</span> <span class="op">+</span> name <span class="op">+</span> <span class="st">`</span><span class="ch">\b</span><span class="st">`</span><span class="op">)</span></span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>  msg<span class="op">,</span> err <span class="op">:=</span> Hello<span class="op">(</span><span class="st">&quot;foobar&quot;</span><span class="op">)</span></span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a>  <span class="kw">if</span> <span class="op">!</span>want<span class="op">.</span>MatchString<span class="op">(</span>msg<span class="op">)</span> <span class="op">||</span> err <span class="op">!=</span> <span class="ot">nil</span> <span class="op">{</span></span>
+<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a>    t<span class="op">.</span>Fatalf<span class="op">(</span><span class="st">`Hello(&quot;foobar&quot;) = %q, %v, want match for %#q, nil`</span><span class="op">,</span> msg<span class="op">,</span> err<span class="op">,</span> want<span class="op">)</span></span>
+<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
+<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-17"><a href="#cb14-17" aria-hidden="true" tabindex="-1"></a><span class="kw">func</span> TestHelloEmpty<span class="op">(</span>t <span class="op">*</span>testing<span class="op">.</span>T<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb14-18"><a href="#cb14-18" aria-hidden="true" tabindex="-1"></a>  msg<span class="op">,</span> err <span class="op">:=</span> Hello<span class="op">(</span><span class="st">&quot;&quot;</span><span class="op">)</span></span>
+<span id="cb14-19"><a href="#cb14-19" aria-hidden="true" tabindex="-1"></a>  <span class="kw">if</span> msg <span class="op">!=</span> <span class="st">&quot;&quot;</span> <span class="op">||</span> err <span class="op">==</span> <span class="ot">nil</span> <span class="op">{</span></span>
+<span id="cb14-20"><a href="#cb14-20" aria-hidden="true" tabindex="-1"></a>    t<span class="op">.</span>Fatalf<span class="op">(</span><span class="st">`Hello(&quot;&quot;) = %q, %v, want &quot;&quot;, error`</span><span class="op">,</span> msg<span class="op">,</span> err<span class="op">)</span></span>
+<span id="cb14-21"><a href="#cb14-21" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
+<span id="cb14-22"><a href="#cb14-22" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode go"><code class="sourceCode go"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="kw">go</span> test</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>PASS</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>ok    example<span class="op">.</span>com<span class="op">/</span>greetings   <span class="dv">0</span><span class="fl">.504</span>s </span></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode go"><code class="sourceCode go"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="kw">go</span> test <span class="op">-</span>v</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="op">===</span> RUN   TestHelloName</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="op">---</span> PASS<span class="op">:</span> TestHelloName <span class="op">(</span><span class="dv">0</span><span class="fl">.00</span>s<span class="op">)</span></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="op">===</span> RUN   TestHelloEmpty</span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a><span class="op">---</span> PASS<span class="op">:</span> TestHelloEmpty <span class="op">(</span><span class="dv">0</span><span class="fl">.00</span>s<span class="op">)</span></span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>PASS</span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>ok    example<span class="op">.</span>com<span class="op">/</span>greetings   <span class="dv">0</span><span class="fl">.236</span>s</span></code></pre></div></li>
+</ul>
+<h2 id="compile-and-install-the-application">Compile and Install the application</h2>
+<ul>
+<li><code>go build</code> builds the executable based on the OS.</li>
+<li>discover the go install path <code>shell script   go list -f '{{.Target}}'   /Users/sandeep_nanajkar/go/bin/hello</code></li>
+<li><code>go install</code> by default installs to the path <code>go list -f '{{.Target}}'</code></li>
+<li>will need to export this path in the PATH variable to execute the ‘hello’ program from any directory. <code>export PATH=$PATH:/Users/sandeep_nanajkar/go/bin/hello</code></li>
+<li>To install to a required path say $HOME/tmp/bin, declare a go env variable <code>GOBIN</code>. <code>go env -w GOBIN=/Users/sandeep_nanajkar/tmp/bin</code>. note: This path needs to be included in the <strong>PATH</strong> environment variable. <code>shell script   mkdir ~/tmp/bin   go env -w GOBIN=/Users/sandeep_nanajkar/tmp/bin   go install   ls ~/tmp/bin/   hello</code></li>
+</ul>
+<h1 id="tour-of-go">Tour of Go</h1>
+<h2 id="intro-go-play-ground">Intro Go Play Ground</h2>
+<ul>
+<li><a href="https://tour.golang.org/welcome/1">Tour of Go</a></li>
+<li>offline version Run <code>go get golang.org/x/tour</code> this will install <code>tour</code> binary in the workspace bin directory.</li>
+<li>Running <code>tour</code> will open up the browser with the tour application
+<ul>
+<li>‘tour’ is built atop the <code>Go Playground</code> webservice that runs on <em>glang.org’s</em> servers</li>
+<li>Go Playground is a sandbox with limitations</li>
+<li>date (time begins at 2009-11-10 23:00:00 UTC) - makes it easier to cache programs, deterministc output?? //todo: later</li>
+</ul></li>
+</ul>
+<h2 id="basics">Basics</h2>
+<h3 id="packages---every-go-program-is-made-up-of-packages.">Packages - every Go program is made up of packages.</h3>
+<ul>
+<li>Program start running in package <code>main</code></li>
+<li>By convention, the package name is the same as the last element of the import path
+<ul>
+<li>For instance, the “math/rand” package comprises files that begin with the statement package rand.</li>
+</ul></li>
+</ul>
+<h3 id="imports">Imports</h3>
+<ul>
+<li><a href="https://www.geeksforgeeks.org/import-in-golang/">GforG: Imports</a></li>
+<li>Best Practice: generally short and simple without ’_’ and ‘-’ <code>go     package main     import (       "fmt"       "math"     )     func main() {       c := math.Exp2(5)       f.Println(c)     }</code></li>
+<li>Nested Import. eg. <code>import "math/rand"</code>
+<ul>
+<li>importing a sub-package from a larger package file.</li>
+<li>why? reduce the memory size for the source code.</li>
+</ul>
+<div class="sourceCode" id="cb17"><pre class="sourceCode go"><code class="sourceCode go"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="kw">package</span> main  </span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="kw">import</span> <span class="op">(</span></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;fmt&quot;</span></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;math/rand&quot;</span></span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a><span class="op">)</span></span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a><span class="kw">func</span> main<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>  fmt<span class="op">.</span>Println<span class="op">(</span>rand<span class="op">.</span>Int<span class="op">(</span><span class="dv">100</span><span class="op">))</span></span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div></li>
+<li>Aliased imports are also supported. <code>go     import m "math"     import f "fmt"</code> <code>go     package main     import (       f "fmt"       m "math"     )     func main() {       c := m.Exp2(5)           f.Println(c)                     }</code></li>
+<li>Dot Import
+<ul>
+<li>rarely used. generally by testers. convinience.</li>
+<li>drawback - can cause namespace conflict.</li>
+</ul>
+<div class="sourceCode" id="cb18"><pre class="sourceCode go"><code class="sourceCode go"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="kw">package</span> main</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="kw">import</span> <span class="op">(</span></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;fmt&quot;</span></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>  <span class="op">.</span> <span class="st">&quot;math&quot;</span></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a><span class="op">)</span></span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a><span class="kw">func</span> main<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>  f<span class="op">.</span>Println<span class="op">(</span>Exp2<span class="op">(</span><span class="dv">5</span><span class="op">))</span>                </span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div></li>
+<li>Blank Import
+<ul>
+<li><p>goLang does not allow a import that’s not going to be used. gives errors.</p></li>
+<li><p>sometimes we need to package to act a a blueprint to be used later.</p></li>
+<li><p>we can use the blank import by placing a blank in the import. <code>import _ "math"</code></p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode go"><code class="sourceCode go"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="kw">package</span> main</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="kw">import</span> <span class="op">(</span></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;fmt&quot;</span></span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;math/rand&quot;</span></span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a><span class="op">)</span></span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a><span class="kw">func</span> main<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>  fmt<span class="op">.</span>Println<span class="op">(</span><span class="st">&quot;Hello Geeks&quot;</span><span class="op">)</span></span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a><span class="co">//The program looks correct but compiler will throw error on building the code.</span></span></code></pre></div>
+<div class="sourceCode" id="cb20"><pre class="sourceCode go"><code class="sourceCode go"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="kw">package</span> main</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="kw">import</span> <span class="op">(</span></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;fmt&quot;</span></span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>  _ <span class="st">&quot;math/rand&quot;</span></span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a><span class="op">)</span></span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a><span class="kw">func</span> main<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>  fmt<span class="op">.</span>Println<span class="op">(</span><span class="st">&quot;Hello Geeks&quot;</span><span class="op">)</span></span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a><span class="co">//Compiler will not throw error on building the code.</span></span></code></pre></div></li>
+</ul></li>
+<li>Relative Imports
+<ul>
+<li>say our packages are in local or on cloud directory</li>
+<li>we cannot directly import the package with its name unless its in the <em>$GOPATH</em>
+<ul>
+<li>lets say our packages is in <em>github.com</em> in repo <em>gopherguides</em> in package <em>greet </em> <code>import "github.com/gopherguides/greet"</code></li>
+</ul>
+<div class="sourceCode" id="cb21"><pre class="sourceCode go"><code class="sourceCode go"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="kw">package</span> main   </span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="kw">import</span> <span class="st">&quot;github.com/gopherguides/greet&quot;</span></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="kw">func</span> main<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>  greet<span class="op">.</span>Hello<span class="op">()</span></span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div></li>
+<li>Circular Imports not supportrd by Go. will throw Compiler error.</li>
+</ul></li>
+</ul>
+<h3 id="exported-names">Exported Names</h3>
+<ul>
+<li><p>In Go, a name is exported if it begins with a capital letter.</p></li>
+<li><p>When importing a package, you can refer only to its exported names.</p></li>
+<li><p>Any “unexported” names (i.e non-capitalized) are not accessible from outside the package.</p></li>
+<li><p><code>math.pi</code> is invalid, <code>math.Pi</code> is valid</p>
+<div class="sourceCode" id="cb22"><pre class="sourceCode go"><code class="sourceCode go"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="kw">package</span> main</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="kw">import</span> <span class="op">(</span></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;fmt&quot;</span></span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;math&quot;</span></span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a> <span class="op">)</span></span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a><span class="kw">func</span> main<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>  <span class="co">//fmt.Println(math.pi) //error: cannot refer to unexported name math.pi</span></span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>  fmt<span class="op">.</span>Println<span class="op">(</span>math<span class="op">.</span>Pi<span class="op">)</span> <span class="co">//correct</span></span>
+<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div></li>
+</ul>
+<h3 id="functions">functions</h3>
+<ul>
+<li><p>can take 0 or more args</p></li>
+<li><p>type comes after variable name</p></li>
+<li><p><a href="https://blog.golang.org/declaration-syntax">Go’s Declaration Syntax</a></p>
+<div class="sourceCode" id="cb23"><pre class="sourceCode go"><code class="sourceCode go"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="kw">func</span> add<span class="op">(</span>x <span class="dt">int</span><span class="op">,</span> y <span class="dt">int</span><span class="op">)</span> <span class="dt">int</span> <span class="op">{</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">return</span> x <span class="op">+</span> y</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div></li>
+<li><p>if 2 or more consicutive args in a fung share the same type, you can omit type from all except last.</p>
+<div class="sourceCode" id="cb24"><pre class="sourceCode go"><code class="sourceCode go"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="kw">func</span> add<span class="op">(</span>x<span class="op">,</span> y <span class="dt">int</span><span class="op">)</span> <span class="dt">int</span> <span class="op">{</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>      <span class="kw">return</span> x <span class="op">+</span> y</span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div></li>
+<li><p>function can return any number of results.</p>
+<div class="sourceCode" id="cb25"><pre class="sourceCode go"><code class="sourceCode go"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="kw">func</span> swap<span class="op">(</span>x<span class="op">,</span> y <span class="dt">string</span><span class="op">)</span> <span class="op">(</span><span class="dt">string</span><span class="op">,</span> <span class="dt">string</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">return</span> y<span class="op">,</span> x</span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div></li>
+<li><p>Named return values</p>
+<ul>
+<li><p>Return values may be named.</p></li>
+<li><p>They are treated as variables defined at the top of the function.</p></li>
+<li><p>return statement without arguments returns the named returns values. This is called the <em>Naked return</em></p>
+<div class="sourceCode" id="cb26"><pre class="sourceCode go"><code class="sourceCode go"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="kw">func</span> split<span class="op">(</span>sum <span class="dt">int</span><span class="op">)</span> <span class="op">(</span>x<span class="op">,</span> y <span class="dt">int</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> sum <span class="op">*</span> <span class="dv">4</span> <span class="op">/</span> <span class="dv">9</span></span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> sum <span class="op">-</span> x</span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a><span class="kw">return</span></span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div></li>
+</ul></li>
+<li><p>Variables</p>
+<ul>
+<li><p>declared using <code>var</code>, as in functions, type is last. <code>var i int</code></p></li>
+<li><p>can include initializers, one per variable</p></li>
+<li><p>if initializers is present, type can be omitted. it will be inferred form the initializer.</p>
+<div class="sourceCode" id="cb27"><pre class="sourceCode go"><code class="sourceCode go"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="kw">package</span> main</span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="kw">import</span> <span class="st">&quot;fmt&quot;</span></span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a><span class="kw">var</span> i<span class="op">,</span> j <span class="dt">int</span> <span class="op">=</span> <span class="dv">1</span><span class="op">,</span> <span class="dv">2</span></span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a><span class="kw">func</span> main<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>  <span class="kw">var</span> c<span class="op">,</span> python<span class="op">,</span> java <span class="op">=</span> <span class="ot">true</span><span class="op">,</span> <span class="ot">false</span><span class="op">,</span> <span class="st">&quot;no!&quot;</span></span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>  fmt<span class="op">.</span>Println<span class="op">(</span>i<span class="op">,</span> j<span class="op">,</span> c<span class="op">,</span> python<span class="op">,</span> java<span class="op">)</span></span>
+<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div></li>
+</ul></li>
+<li><p>Short variable declaration</p>
+<ul>
+<li>the <code>:=</code> is called the short assignment statement</li>
+<li>Can be done <strong>only inside a function</strong></li>
+<li>no need to use <code>var</code></li>
+<li>outside a function, every statement begins with a key word _(var, func, …)</li>
+<li><code>:=</code> construct is not available outside a function.</li>
+</ul></li>
+<li><p>Go’s basic types</p>
+<ul>
+<li><code>bool</code>,</li>
+<li><code>string</code>,</li>
+<li><code>int int8 int16 int32 int64</code></li>
+<li><code>uint uint8 uint16 uint32 uint64 uintptr</code></li>
+<li><code>int</code>/<code>uint</code> will be <code>int32</code>/<code>uint32</code> or <code>int64</code>/<code>uint64</code> based on the OS</li>
+<li><code>byte</code> alias for <code>uint8</code></li>
+<li><code>rune</code> alias for <code>uint32</code> represents a unicode code point. ??</li>
+<li><code>float32</code> <code>float64</code></li>
+<li><code>complex64</code> <code>complex128</code></li>
+<li>variables declared without explicit initialization
+<ul>
+<li>0 for numeric types</li>
+<li>false for boolean type</li>
+<li><code>""</code> for strings</li>
+</ul></li>
+<li>Type conversions
+<ul>
+<li><p><code>T(v)</code> converts <code>v</code> to type <code>T</code></p>
+<div class="sourceCode" id="cb28"><pre class="sourceCode go"><code class="sourceCode go"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>i <span class="op">:=</span> <span class="dv">34</span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>f <span class="op">:=</span> <span class="dt">float64</span><span class="op">(</span>i<span class="op">)</span></span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>u <span class="op">:=</span> <span class="dt">uint</span><span class="op">(</span>f<span class="op">)</span></span></code></pre></div></li>
+<li><p>unlike ‘c’ ‘go’ requires explicit conversion</p>
+<div class="sourceCode" id="cb29"><pre class="sourceCode go"><code class="sourceCode go"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="kw">var</span> f <span class="dt">float64</span> <span class="op">=</span> <span class="dv">2</span><span class="fl">.43</span></span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="kw">var</span> z <span class="dt">uint</span> <span class="op">=</span> f <span class="co">//error: cannot use f (type float64) as type uint in assignment</span></span></code></pre></div></li>
+</ul></li>
+<li>Type inference
+<ul>
+<li>declaring a variable without a explicit type, the type is inferred from the value on the right.</li>
+<li>when the right hand value is itself untyped numeric constant, the type assigned (int, float64, or complex128) will depend on the pression.</li>
+</ul></li>
+<li>Constants
+<ul>
+<li><code>const</code> keyword</li>
+<li><code>const</code> cannot be declared using <code>:=</code> syntax</li>
+</ul></li>
+<li>Numeric Constants
+<ul>
+<li>high precision values</li>
+<li>untyped constant takes the type needed by its contest</li>
+<li>an int can store at max 64-bit integers, sometimes less</li>
+</ul>
+<div class="sourceCode" id="cb30"><pre class="sourceCode go"><code class="sourceCode go"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="kw">package</span> main</span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a><span class="kw">import</span> <span class="st">&quot;fmt&quot;</span></span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> <span class="op">(</span></span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>  Big <span class="op">=</span> <span class="dv">1</span> <span class="op">&lt;&lt;</span> <span class="dv">100</span></span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a>  Small <span class="op">=</span> Big <span class="op">&gt;&gt;</span> <span class="dv">99</span></span>
+<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a><span class="op">)</span></span>
+<span id="cb30-7"><a href="#cb30-7" aria-hidden="true" tabindex="-1"></a><span class="kw">func</span> needInt<span class="op">(</span>x <span class="dt">int</span><span class="op">)</span> <span class="dt">int</span> <span class="op">{</span> <span class="kw">return</span> x<span class="op">*</span><span class="dv">10</span> <span class="op">+</span> <span class="dv">1</span> <span class="op">}</span></span>
+<span id="cb30-8"><a href="#cb30-8" aria-hidden="true" tabindex="-1"></a><span class="kw">func</span> needFloat<span class="op">(</span>x <span class="dt">float64</span><span class="op">)</span> <span class="dt">float64</span> <span class="op">{</span></span>
+<span id="cb30-9"><a href="#cb30-9" aria-hidden="true" tabindex="-1"></a>  <span class="kw">return</span> x <span class="op">*</span> <span class="dv">0</span><span class="fl">.1</span></span>
+<span id="cb30-10"><a href="#cb30-10" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb30-11"><a href="#cb30-11" aria-hidden="true" tabindex="-1"></a><span class="kw">func</span> main<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb30-12"><a href="#cb30-12" aria-hidden="true" tabindex="-1"></a>  fmt<span class="op">.</span>Println<span class="op">(</span>needInt<span class="op">(</span>Small<span class="op">))</span></span>
+<span id="cb30-13"><a href="#cb30-13" aria-hidden="true" tabindex="-1"></a>  fmt<span class="op">.</span>Println<span class="op">(</span>needFloat<span class="op">(</span>Small<span class="op">))</span></span>
+<span id="cb30-14"><a href="#cb30-14" aria-hidden="true" tabindex="-1"></a>  fmt<span class="op">.</span>Println<span class="op">(</span>needFloat<span class="op">(</span>Big<span class="op">))</span></span>
+<span id="cb30-15"><a href="#cb30-15" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div></li>
+</ul></li>
+<li><p>Control Structures</p></li>
+<li><p><code>for [init]; condition; [post]</code> Note: init and post are optional</p></li>
+<li><p><code>for i := 0; i &lt; 10; i++ {}</code> Note: no brackets unlike c, java, js</p></li>
+<li><p><code>for ; sum &lt; 1000; {}</code></p></li>
+<li><p>There is no separate while. <code>for sum &lt; 1000 {}</code> is while</p></li>
+<li><p>forever <code>for {}</code></p></li>
+<li><p><code>if x &lt; 0 {}</code> Expression parenthesis not required, braces for the if body needed</p></li>
+<li><p>if with short statement. The if statement can start with a short statement to execute before the condition.</p>
+<ul>
+<li><code>if v := math.Pow(x, n); v &lt; lim {)</code></li>
+<li>variable declared within if, are limited to the scope within the if.</li>
+</ul></li>
+<li><p>variables declared within a if are available to any of the else block</p>
+<div class="sourceCode" id="cb31"><pre class="sourceCode go"><code class="sourceCode go"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="kw">if</span> v <span class="op">:=</span> math<span class="op">.</span>Pow<span class="op">(</span>x<span class="op">,</span> n<span class="op">);</span> v <span class="op">&lt;</span> lim <span class="op">{</span></span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">return</span> v</span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a><span class="op">}</span> <span class="kw">else</span> <span class="op">{</span></span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>  fmt<span class="op">.</span>Printf<span class="op">(</span><span class="st">&quot;%g &gt;= %g</span><span class="ch">\n</span><span class="st">&quot;</span><span class="op">,</span> v<span class="op">,</span> lim<span class="op">)</span></span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<ul>
+<li><a href="https://github.com/sandeepnjk/explore/blob/master/explore-go/excercises/excersises.go">Ex: find closest square-root for a number</a></li>
+</ul></li>
+<li><p>Go switch cases, runs only the selected case. (i.e. break is implicit.) <code>go      switch os := runtime.GOOS; os {        case "darwin":          fmt.Println("OS X.")        case "linux":          fmt.Println("Linux.")        default:      fmt.Printf("%s.\n", os)      }</code></p>
+<ul>
+<li>cases need not be constant and values need not be integers</li>
+<li>Switch with no conditions (i.e switch true) ’‘’go func main() { t := time.Now() switch { case t.Hour() &lt; 12: fmt.Println(“Good morning!”) case t.Hour() &lt; 17: fmt.Println(“Good afternoon.”) default: fmt.Println(“Good evening.”) } }’’’</li>
+</ul></li>
+<li><p><code>Defer</code> keyword. A defer statement defers the execution of a function until the surrounding function returns. <code>go     package main     import "fmt"     func main() {       defer fmt.Println("world")       fmt.Println("hello")       //hello followed by world     }</code></p>
+<ul>
+<li>Deferred functions calls pushed onto the stack, LIFO</li>
+</ul></li>
+</ul>
+<h3 id="struct-slices-maps">Struct, Slices, Maps</h3>
+<ul>
+<li>Pointers
+<ul>
+<li>Go has pointers</li>
+<li>type <code>*T</code> is a pointer to T value</li>
+<li><code>&amp;</code> operator generates a pointer to its operand</li>
+<li><div class="sourceCode" id="cb32"><pre class="sourceCode go"><code class="sourceCode go"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>i<span class="op">,</span> j <span class="op">:=</span> <span class="dv">42</span><span class="op">,</span> <span class="dv">2701</span></span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>p <span class="op">:=</span> <span class="op">&amp;</span>i</span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>fmt<span class="op">.</span>Println<span class="op">(*</span>p<span class="op">)</span> <span class="co">//42</span></span>
+<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a><span class="op">*</span>p <span class="op">=</span> <span class="dv">21</span></span>
+<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a>fmt<span class="op">.</span>Println<span class="op">(</span>i<span class="op">)</span> <span class="co">//21</span></span>
+<span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-8"><a href="#cb32-8" aria-hidden="true" tabindex="-1"></a>p <span class="op">=</span> <span class="op">&amp;</span>j</span>
+<span id="cb32-9"><a href="#cb32-9" aria-hidden="true" tabindex="-1"></a><span class="op">*</span>p <span class="op">=</span> <span class="op">*</span>p <span class="op">/</span> <span class="dv">37</span>    <span class="co">// 2701 / 37</span></span>
+<span id="cb32-10"><a href="#cb32-10" aria-hidden="true" tabindex="-1"></a>fmt<span class="op">.</span>Println<span class="op">(*</span>p<span class="op">)</span> <span class="co">//73</span></span></code></pre></div></li>
+</ul></li>
+<li>Structs
+<ul>
+<li>collection of fields</li>
+<li>fields accessed using .</li>
+<li>Pointers to Struct, The special prefix &amp; returns a pointer to the struct value.</li>
+<li><div class="sourceCode" id="cb33"><pre class="sourceCode go"><code class="sourceCode go"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="kw">package</span> main</span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a><span class="kw">import</span> <span class="st">&quot;fmt&quot;</span></span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a><span class="kw">type</span> Vertex <span class="kw">struct</span> <span class="op">{</span></span>
+<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a>  X <span class="dt">int</span></span>
+<span id="cb33-7"><a href="#cb33-7" aria-hidden="true" tabindex="-1"></a>  Y <span class="dt">int</span></span>
+<span id="cb33-8"><a href="#cb33-8" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb33-9"><a href="#cb33-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-10"><a href="#cb33-10" aria-hidden="true" tabindex="-1"></a><span class="kw">func</span> main<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb33-11"><a href="#cb33-11" aria-hidden="true" tabindex="-1"></a>  v <span class="op">:=</span> Vertex<span class="op">{</span><span class="dv">1</span><span class="op">,</span> <span class="dv">2</span><span class="op">}</span></span>
+<span id="cb33-12"><a href="#cb33-12" aria-hidden="true" tabindex="-1"></a>  fmt<span class="op">.</span>Println<span class="op">(</span>v<span class="op">)</span> <span class="co">//{1 2}</span></span>
+<span id="cb33-13"><a href="#cb33-13" aria-hidden="true" tabindex="-1"></a>  v<span class="op">.</span>X <span class="op">=</span> <span class="dv">4</span></span>
+<span id="cb33-14"><a href="#cb33-14" aria-hidden="true" tabindex="-1"></a>  fmt<span class="op">.</span>Println<span class="op">(</span>v<span class="op">.</span>X<span class="op">)</span> <span class="co">//4</span></span>
+<span id="cb33-15"><a href="#cb33-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-16"><a href="#cb33-16" aria-hidden="true" tabindex="-1"></a>  p <span class="op">:=</span> <span class="op">&amp;</span>v</span>
+<span id="cb33-17"><a href="#cb33-17" aria-hidden="true" tabindex="-1"></a>  p<span class="op">.</span>X <span class="op">=</span> <span class="dv">345</span></span>
+<span id="cb33-18"><a href="#cb33-18" aria-hidden="true" tabindex="-1"></a>  fmt<span class="op">.</span>Println<span class="op">()</span> <span class="co">//{345 2}</span></span>
+<span id="cb33-19"><a href="#cb33-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-20"><a href="#cb33-20" aria-hidden="true" tabindex="-1"></a>  <span class="kw">var</span> <span class="op">(</span></span>
+<span id="cb33-21"><a href="#cb33-21" aria-hidden="true" tabindex="-1"></a>    v1 <span class="op">=</span> Vertex<span class="op">{</span><span class="dv">1</span><span class="op">,</span> <span class="dv">2</span><span class="op">}</span>  <span class="co">// has type Vertex</span></span>
+<span id="cb33-22"><a href="#cb33-22" aria-hidden="true" tabindex="-1"></a>    v2 <span class="op">=</span> Vertex<span class="op">{</span>X<span class="op">:</span> <span class="dv">1</span><span class="op">}</span>  <span class="co">// Y:0 is implicit</span></span>
+<span id="cb33-23"><a href="#cb33-23" aria-hidden="true" tabindex="-1"></a>    v3 <span class="op">=</span> Vertex<span class="op">{}</span>      <span class="co">// X:0 and Y:0</span></span>
+<span id="cb33-24"><a href="#cb33-24" aria-hidden="true" tabindex="-1"></a>    p  <span class="op">=</span> <span class="op">&amp;</span>Vertex<span class="op">{</span><span class="dv">1</span><span class="op">,</span> <span class="dv">2</span><span class="op">}</span> <span class="co">// has type *Vertex</span></span>
+<span id="cb33-25"><a href="#cb33-25" aria-hidden="true" tabindex="-1"></a>    fmt<span class="op">.</span>Println<span class="op">(</span>v1<span class="op">,</span> p<span class="op">,</span> v2<span class="op">,</span> v3<span class="op">)</span> <span class="co">//{1 2} &amp;{1 2} {1 0} {0 0}</span></span>
+<span id="cb33-26"><a href="#cb33-26" aria-hidden="true" tabindex="-1"></a>    fmt<span class="op">.</span>Println<span class="op">(</span>v1<span class="op">,</span> <span class="op">*</span>p<span class="op">,</span> v2<span class="op">,</span> v3<span class="op">)</span> <span class="co">//{1 2} {1 2} {1 0} {0 0}</span></span>
+<span id="cb33-27"><a href="#cb33-27" aria-hidden="true" tabindex="-1"></a>  <span class="op">)</span></span>
+<span id="cb33-28"><a href="#cb33-28" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div></li>
+</ul></li>
+<li>Arrays
+<ul>
+<li>The type <code>[n]T</code> is an array of <code>n</code> values of type <code>T</code></li>
+<li><code>var a [10]int</code> Length of an array is a part of its type</li>
+<li>cannot be resized</li>
+<li><div class="sourceCode" id="cb34"><pre class="sourceCode go"><code class="sourceCode go"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="kw">package</span> main</span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a><span class="kw">import</span> <span class="st">&quot;fmt&quot;</span></span>
+<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a><span class="kw">func</span> main<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb34-6"><a href="#cb34-6" aria-hidden="true" tabindex="-1"></a>  <span class="kw">var</span> a <span class="op">[</span><span class="dv">2</span><span class="op">]</span><span class="dt">string</span></span>
+<span id="cb34-7"><a href="#cb34-7" aria-hidden="true" tabindex="-1"></a>  a<span class="op">[</span><span class="dv">0</span><span class="op">]</span> <span class="op">=</span> <span class="st">&quot;Hello&quot;</span></span>
+<span id="cb34-8"><a href="#cb34-8" aria-hidden="true" tabindex="-1"></a>  a<span class="op">[</span><span class="dv">1</span><span class="op">]</span> <span class="op">=</span> <span class="st">&quot;World&quot;</span></span>
+<span id="cb34-9"><a href="#cb34-9" aria-hidden="true" tabindex="-1"></a>  fmt<span class="op">.</span>Println<span class="op">(</span>a<span class="op">[</span><span class="dv">0</span><span class="op">],</span> a<span class="op">[</span><span class="dv">1</span><span class="op">])</span> <span class="co">// Hello World</span></span>
+<span id="cb34-10"><a href="#cb34-10" aria-hidden="true" tabindex="-1"></a>  fmt<span class="op">.</span>Println<span class="op">(</span>a<span class="op">)</span> <span class="co">//[Hello World]</span></span>
+<span id="cb34-11"><a href="#cb34-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-12"><a href="#cb34-12" aria-hidden="true" tabindex="-1"></a>  primes <span class="op">:=</span> <span class="op">[</span><span class="dv">6</span><span class="op">]</span><span class="dt">int</span><span class="op">{</span><span class="dv">2</span><span class="op">,</span> <span class="dv">3</span><span class="op">,</span> <span class="dv">5</span><span class="op">,</span> <span class="dv">7</span><span class="op">,</span> <span class="dv">11</span><span class="op">,</span> <span class="dv">13</span><span class="op">}</span></span>
+<span id="cb34-13"><a href="#cb34-13" aria-hidden="true" tabindex="-1"></a>  fmt<span class="op">.</span>Println<span class="op">(</span>primes<span class="op">)</span> <span class="co">//[2 3 5 7 11 13]</span></span>
+<span id="cb34-14"><a href="#cb34-14" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div></li>
+</ul></li>
+<li>Slices
+<ul>
+<li><a href="#go-slice-type">Details</a></li>
+<li><code>[]T</code> is a slice with elements of Type <code>T</code></li>
+<li><div class="sourceCode" id="cb35"><pre class="sourceCode go"><code class="sourceCode go"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="kw">package</span> main</span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a><span class="kw">import</span> <span class="st">&quot;fmt&quot;</span></span>
+<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a><span class="kw">func</span> main<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb35-6"><a href="#cb35-6" aria-hidden="true" tabindex="-1"></a>  primes <span class="op">:=</span> <span class="op">[</span><span class="dv">6</span><span class="op">]</span><span class="dt">int</span><span class="op">{</span><span class="dv">2</span><span class="op">,</span> <span class="dv">3</span><span class="op">,</span> <span class="dv">5</span><span class="op">,</span> <span class="dv">7</span><span class="op">,</span> <span class="dv">11</span><span class="op">,</span> <span class="dv">13</span><span class="op">}</span></span>
+<span id="cb35-7"><a href="#cb35-7" aria-hidden="true" tabindex="-1"></a>  <span class="kw">var</span> s <span class="op">[]</span><span class="dt">int</span> <span class="op">=</span> primes<span class="op">[</span><span class="dv">1</span><span class="op">:</span><span class="dv">4</span><span class="op">]</span></span>
+<span id="cb35-8"><a href="#cb35-8" aria-hidden="true" tabindex="-1"></a>  fmt<span class="op">.</span>Println<span class="op">(</span>s<span class="op">)</span> <span class="op">[</span><span class="dv">3</span> <span class="dv">5</span> <span class="dv">7</span><span class="op">]</span></span>
+<span id="cb35-9"><a href="#cb35-9" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div></li>
+<li>slice does not store data, refers to the underlying array</li>
+<li>changes to the elements in the slice are actually on the underlying array</li>
+<li>other slices that reference the same array, will see those changes</li>
+<li><div class="sourceCode" id="cb36"><pre class="sourceCode go"><code class="sourceCode go"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="kw">package</span> main</span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a><span class="kw">import</span> <span class="st">&quot;fmt&quot;</span></span>
+<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a><span class="kw">func</span> main<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb36-6"><a href="#cb36-6" aria-hidden="true" tabindex="-1"></a>  names <span class="op">:=</span> <span class="op">[</span><span class="dv">4</span><span class="op">]</span><span class="dt">string</span><span class="op">{</span></span>
+<span id="cb36-7"><a href="#cb36-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;John&quot;</span><span class="op">,</span></span>
+<span id="cb36-8"><a href="#cb36-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;Paul&quot;</span><span class="op">,</span></span>
+<span id="cb36-9"><a href="#cb36-9" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;George&quot;</span><span class="op">,</span></span>
+<span id="cb36-10"><a href="#cb36-10" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;Ringo&quot;</span><span class="op">,</span></span>
+<span id="cb36-11"><a href="#cb36-11" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
+<span id="cb36-12"><a href="#cb36-12" aria-hidden="true" tabindex="-1"></a>  fmt<span class="op">.</span>Println<span class="op">(</span>names<span class="op">)</span></span>
+<span id="cb36-13"><a href="#cb36-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-14"><a href="#cb36-14" aria-hidden="true" tabindex="-1"></a>  a <span class="op">:=</span> names<span class="op">[</span><span class="dv">0</span><span class="op">:</span><span class="dv">2</span><span class="op">]</span></span>
+<span id="cb36-15"><a href="#cb36-15" aria-hidden="true" tabindex="-1"></a>  b <span class="op">:=</span> names<span class="op">[</span><span class="dv">1</span><span class="op">:</span><span class="dv">3</span><span class="op">]</span></span>
+<span id="cb36-16"><a href="#cb36-16" aria-hidden="true" tabindex="-1"></a>  fmt<span class="op">.</span>Println<span class="op">(</span>a<span class="op">,</span> b<span class="op">)</span> <span class="co">//slice [John Paul] [Paul George]</span></span>
+<span id="cb36-17"><a href="#cb36-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-18"><a href="#cb36-18" aria-hidden="true" tabindex="-1"></a>  b<span class="op">[</span><span class="dv">0</span><span class="op">]</span> <span class="op">=</span> <span class="st">&quot;XXX&quot;</span></span>
+<span id="cb36-19"><a href="#cb36-19" aria-hidden="true" tabindex="-1"></a>  fmt<span class="op">.</span>Println<span class="op">(</span>a<span class="op">,</span> b<span class="op">)</span> <span class="co">//slice [John XXX] [XXX George]</span></span>
+<span id="cb36-20"><a href="#cb36-20" aria-hidden="true" tabindex="-1"></a>  fmt<span class="op">.</span>Println<span class="op">(</span>names<span class="op">)</span> <span class="op">[</span>John XXX George Ringo<span class="op">]</span></span>
+<span id="cb36-21"><a href="#cb36-21" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div></li>
+<li>slice literals
+<ul>
+<li><div class="sourceCode" id="cb37"><pre class="sourceCode go"><code class="sourceCode go"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="kw">package</span> main</span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a><span class="kw">import</span> <span class="st">&quot;fmt&quot;</span></span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a><span class="kw">func</span> main<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a>  q <span class="op">:=</span> <span class="op">[]</span><span class="dt">int</span><span class="op">{</span><span class="dv">2</span><span class="op">,</span> <span class="dv">3</span><span class="op">,</span> <span class="dv">5</span><span class="op">,</span> <span class="dv">7</span><span class="op">,</span> <span class="dv">11</span><span class="op">,</span> <span class="dv">13</span><span class="op">}</span></span>
+<span id="cb37-5"><a href="#cb37-5" aria-hidden="true" tabindex="-1"></a>  fmt<span class="op">.</span>Println<span class="op">(</span>q<span class="op">)</span></span>
+<span id="cb37-6"><a href="#cb37-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-7"><a href="#cb37-7" aria-hidden="true" tabindex="-1"></a>  r <span class="op">:=</span> <span class="op">[]</span><span class="dt">bool</span><span class="op">{</span><span class="ot">true</span><span class="op">,</span> <span class="ot">false</span><span class="op">,</span> <span class="ot">true</span><span class="op">,</span> <span class="ot">true</span><span class="op">,</span> <span class="ot">false</span><span class="op">,</span> <span class="ot">true</span><span class="op">}</span></span>
+<span id="cb37-8"><a href="#cb37-8" aria-hidden="true" tabindex="-1"></a>  fmt<span class="op">.</span>Println<span class="op">(</span>r<span class="op">)</span></span>
+<span id="cb37-9"><a href="#cb37-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-10"><a href="#cb37-10" aria-hidden="true" tabindex="-1"></a>  s <span class="op">:=</span> <span class="op">[]</span><span class="kw">struct</span> <span class="op">{</span></span>
+<span id="cb37-11"><a href="#cb37-11" aria-hidden="true" tabindex="-1"></a>    i <span class="dt">int</span></span>
+<span id="cb37-12"><a href="#cb37-12" aria-hidden="true" tabindex="-1"></a>    b <span class="dt">bool</span></span>
+<span id="cb37-13"><a href="#cb37-13" aria-hidden="true" tabindex="-1"></a>  <span class="op">}{</span></span>
+<span id="cb37-14"><a href="#cb37-14" aria-hidden="true" tabindex="-1"></a>     <span class="op">{</span><span class="dv">2</span><span class="op">,</span> <span class="ot">true</span><span class="op">},</span></span>
+<span id="cb37-15"><a href="#cb37-15" aria-hidden="true" tabindex="-1"></a>     <span class="op">{</span><span class="dv">3</span><span class="op">,</span> <span class="ot">false</span><span class="op">},</span></span>
+<span id="cb37-16"><a href="#cb37-16" aria-hidden="true" tabindex="-1"></a>     <span class="op">{</span><span class="dv">5</span><span class="op">,</span> <span class="ot">true</span><span class="op">},</span></span>
+<span id="cb37-17"><a href="#cb37-17" aria-hidden="true" tabindex="-1"></a>     <span class="op">{</span><span class="dv">7</span><span class="op">,</span> <span class="ot">true</span><span class="op">},</span></span>
+<span id="cb37-18"><a href="#cb37-18" aria-hidden="true" tabindex="-1"></a>     <span class="op">{</span><span class="dv">11</span><span class="op">,</span> <span class="ot">false</span><span class="op">},</span></span>
+<span id="cb37-19"><a href="#cb37-19" aria-hidden="true" tabindex="-1"></a>     <span class="op">{</span><span class="dv">13</span><span class="op">,</span> <span class="ot">true</span><span class="op">},</span></span>
+<span id="cb37-20"><a href="#cb37-20" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
+<span id="cb37-21"><a href="#cb37-21" aria-hidden="true" tabindex="-1"></a>  fmt<span class="op">.</span>Println<span class="op">(</span>s<span class="op">)</span></span>
+<span id="cb37-22"><a href="#cb37-22" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div></li>
+</ul></li>
+<li>when slicing, high or low bounds can be omitted to use defaults
+<ul>
+<li><div class="sourceCode" id="cb38"><pre class="sourceCode go"><code class="sourceCode go"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>a <span class="op">:=</span> <span class="op">[</span><span class="dv">10</span><span class="op">]</span><span class="dt">int</span></span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>s <span class="op">=</span> a<span class="op">[</span><span class="dv">0</span><span class="op">:</span><span class="dv">10</span><span class="op">]</span></span>
+<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a>s1 <span class="op">=</span> a<span class="op">[:</span><span class="dv">10</span><span class="op">]</span></span>
+<span id="cb38-5"><a href="#cb38-5" aria-hidden="true" tabindex="-1"></a>s2 <span class="op">=</span> a<span class="op">[</span><span class="dv">0</span><span class="op">:]</span></span>
+<span id="cb38-6"><a href="#cb38-6" aria-hidden="true" tabindex="-1"></a>s3 <span class="op">=</span> a<span class="op">[:]</span></span>
+<span id="cb38-7"><a href="#cb38-7" aria-hidden="true" tabindex="-1"></a><span class="co">//all are equivalent</span></span></code></pre></div></li>
+</ul></li>
+<li>length and capacity of a slice - <code>len(s)</code>, <code>cap(s)</code>
+<ul>
+<li>a slice can be extended, but cannot be extended beyond the slice capacity</li>
+<li><div class="sourceCode" id="cb39"><pre class="sourceCode go"><code class="sourceCode go"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="kw">package</span> main</span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a><span class="kw">import</span> <span class="st">&quot;fmt&quot;</span></span>
+<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a><span class="kw">func</span> main<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb39-5"><a href="#cb39-5" aria-hidden="true" tabindex="-1"></a>  s <span class="op">:=</span> <span class="op">[]</span><span class="dt">int</span><span class="op">{</span><span class="dv">2</span><span class="op">,</span> <span class="dv">3</span><span class="op">,</span> <span class="dv">5</span><span class="op">,</span> <span class="dv">7</span><span class="op">,</span> <span class="dv">11</span><span class="op">,</span> <span class="dv">13</span><span class="op">}</span></span>
+<span id="cb39-6"><a href="#cb39-6" aria-hidden="true" tabindex="-1"></a>  printSlice<span class="op">(</span>s<span class="op">)</span> <span class="co">//len=6 cap=6 [2 3 5 7 11 13]</span></span>
+<span id="cb39-7"><a href="#cb39-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-8"><a href="#cb39-8" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Slice the slice to give it zero length.</span></span>
+<span id="cb39-9"><a href="#cb39-9" aria-hidden="true" tabindex="-1"></a>  s <span class="op">=</span> s<span class="op">[:</span><span class="dv">0</span><span class="op">]</span></span>
+<span id="cb39-10"><a href="#cb39-10" aria-hidden="true" tabindex="-1"></a>  printSlice<span class="op">(</span>s<span class="op">)</span> <span class="co">//len=0 cap=6 []</span></span>
+<span id="cb39-11"><a href="#cb39-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-12"><a href="#cb39-12" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Extend its length.</span></span>
+<span id="cb39-13"><a href="#cb39-13" aria-hidden="true" tabindex="-1"></a>  s <span class="op">=</span> s<span class="op">[:</span><span class="dv">4</span><span class="op">]</span></span>
+<span id="cb39-14"><a href="#cb39-14" aria-hidden="true" tabindex="-1"></a>  printSlice<span class="op">(</span>s<span class="op">)</span> <span class="co">//len=4 cap=6 [2 3 5 7]</span></span>
+<span id="cb39-15"><a href="#cb39-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-16"><a href="#cb39-16" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Drop its first two values.</span></span>
+<span id="cb39-17"><a href="#cb39-17" aria-hidden="true" tabindex="-1"></a>  s <span class="op">=</span> s<span class="op">[</span><span class="dv">2</span><span class="op">:]</span></span>
+<span id="cb39-18"><a href="#cb39-18" aria-hidden="true" tabindex="-1"></a>  printSlice<span class="op">(</span>s<span class="op">)</span> <span class="co">//len=2 cap=4 [5 7]</span></span>
+<span id="cb39-19"><a href="#cb39-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-20"><a href="#cb39-20" aria-hidden="true" tabindex="-1"></a>  s <span class="op">=</span> s<span class="op">[:</span><span class="dv">7</span><span class="op">]</span> <span class="co">//panic: runtime error: slice bounds out of range [:7] with capacity 4</span></span>
+<span id="cb39-21"><a href="#cb39-21" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb39-22"><a href="#cb39-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-23"><a href="#cb39-23" aria-hidden="true" tabindex="-1"></a><span class="kw">func</span> printSlice<span class="op">(</span>s <span class="op">[]</span><span class="dt">int</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb39-24"><a href="#cb39-24" aria-hidden="true" tabindex="-1"></a>  fmt<span class="op">.</span>Printf<span class="op">(</span><span class="st">&quot;len=%d cap=%d %v</span><span class="ch">\n</span><span class="st">&quot;</span><span class="op">,</span> <span class="bu">len</span><span class="op">(</span>s<span class="op">),</span> <span class="bu">cap</span><span class="op">(</span>s<span class="op">),</span> s<span class="op">)</span></span>
+<span id="cb39-25"><a href="#cb39-25" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div></li>
+</ul></li>
+<li>Nil Slices, length and capacity are 0. <code>s := []int</code>
+<ul>
+<li><div class="sourceCode" id="cb40"><pre class="sourceCode go"><code class="sourceCode go"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>  <span class="kw">package</span> main</span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">import</span> <span class="st">&quot;fmt&quot;</span></span>
+<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a>  <span class="kw">func</span> main<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a>    <span class="kw">var</span> s <span class="op">[]</span><span class="dt">int</span></span>
+<span id="cb40-5"><a href="#cb40-5" aria-hidden="true" tabindex="-1"></a>    fmt<span class="op">.</span>Println<span class="op">(</span>s<span class="op">,</span> <span class="bu">len</span><span class="op">(</span>s<span class="op">),</span> <span class="bu">cap</span><span class="op">(</span>s<span class="op">))</span> <span class="co">//[] 0 0</span></span>
+<span id="cb40-6"><a href="#cb40-6" aria-hidden="true" tabindex="-1"></a>    <span class="kw">if</span> s <span class="op">==</span> <span class="ot">nil</span> <span class="op">{</span></span>
+<span id="cb40-7"><a href="#cb40-7" aria-hidden="true" tabindex="-1"></a>            fmt<span class="op">.</span>Println<span class="op">(</span><span class="st">&quot;nil!&quot;</span><span class="op">)</span></span>
+<span id="cb40-8"><a href="#cb40-8" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb40-9"><a href="#cb40-9" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span></code></pre></div></li>
+</ul></li>
+<li>Creating a slice with make
+<ul>
+<li><code>a := make([]int, 5)  // len(a)=5</code></li>
+<li><code>b := make([]int, 0, 5) // len(b)=0, cap(b)=5</code></li>
+</ul></li>
+<li>slice can contain any type including other slices.</li>
+<li>appending to slice
+<ul>
+<li>slice grows as is needed, underlying array is changed</li>
+<li><div class="sourceCode" id="cb41"><pre class="sourceCode go"><code class="sourceCode go"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="kw">package</span> main</span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a><span class="kw">import</span> <span class="st">&quot;fmt&quot;</span></span>
+<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a><span class="kw">func</span> main<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb41-4"><a href="#cb41-4" aria-hidden="true" tabindex="-1"></a>  <span class="kw">var</span> s <span class="op">[]</span><span class="dt">int</span></span>
+<span id="cb41-5"><a href="#cb41-5" aria-hidden="true" tabindex="-1"></a>  printSlice<span class="op">(</span>s<span class="op">)</span> <span class="co">//len=0 cap=0 []</span></span>
+<span id="cb41-6"><a href="#cb41-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-7"><a href="#cb41-7" aria-hidden="true" tabindex="-1"></a>  <span class="co">// append works on nil slices.</span></span>
+<span id="cb41-8"><a href="#cb41-8" aria-hidden="true" tabindex="-1"></a>  s <span class="op">=</span> <span class="bu">append</span><span class="op">(</span>s<span class="op">,</span> <span class="dv">0</span><span class="op">)</span></span>
+<span id="cb41-9"><a href="#cb41-9" aria-hidden="true" tabindex="-1"></a>  printSlice<span class="op">(</span>s<span class="op">)</span> <span class="co">//len=1 cap=1 [0] </span></span>
+<span id="cb41-10"><a href="#cb41-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-11"><a href="#cb41-11" aria-hidden="true" tabindex="-1"></a>  <span class="co">// The slice grows as needed.</span></span>
+<span id="cb41-12"><a href="#cb41-12" aria-hidden="true" tabindex="-1"></a>  s <span class="op">=</span> <span class="bu">append</span><span class="op">(</span>s<span class="op">,</span> <span class="dv">1</span><span class="op">)</span></span>
+<span id="cb41-13"><a href="#cb41-13" aria-hidden="true" tabindex="-1"></a>  printSlice<span class="op">(</span>s<span class="op">)</span> <span class="co">//len=2 cap=2 [0 1]</span></span>
+<span id="cb41-14"><a href="#cb41-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-15"><a href="#cb41-15" aria-hidden="true" tabindex="-1"></a>  <span class="co">// We can add more than one element at a time.</span></span>
+<span id="cb41-16"><a href="#cb41-16" aria-hidden="true" tabindex="-1"></a>  s <span class="op">=</span> <span class="bu">append</span><span class="op">(</span>s<span class="op">,</span> <span class="dv">2</span><span class="op">,</span> <span class="dv">3</span><span class="op">,</span> <span class="dv">4</span><span class="op">)</span></span>
+<span id="cb41-17"><a href="#cb41-17" aria-hidden="true" tabindex="-1"></a>  printSlice<span class="op">(</span>s<span class="op">)</span> <span class="co">//len=5 cap=6 [0 1 2 3 4] //something funny here, cap is not 5 but 6, looks like append uses some logic</span></span>
+<span id="cb41-18"><a href="#cb41-18" aria-hidden="true" tabindex="-1"></a><span class="co">//https://github.com/golang/go/blob/87e48c5afdcf5e01bb2b7f51b7643e8901f4b7f9/src/runtime/slice.go#L100-L112</span></span>
+<span id="cb41-19"><a href="#cb41-19" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb41-20"><a href="#cb41-20" aria-hidden="true" tabindex="-1"></a><span class="kw">func</span> printSlice<span class="op">(</span>s <span class="op">[]</span><span class="dt">int</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb41-21"><a href="#cb41-21" aria-hidden="true" tabindex="-1"></a>  fmt<span class="op">.</span>Printf<span class="op">(</span><span class="st">&quot;len=%d cap=%d %v</span><span class="ch">\n</span><span class="st">&quot;</span><span class="op">,</span> <span class="bu">len</span><span class="op">(</span>s<span class="op">),</span> <span class="bu">cap</span><span class="op">(</span>s<span class="op">),</span> s<span class="op">)</span></span>
+<span id="cb41-22"><a href="#cb41-22" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div></li>
+<li><a href="https://github.com/golang/go/blob/87e48c5afdcf5e01bb2b7f51b7643e8901f4b7f9/src/runtime/slice.go#L100-L112">slice append logic</a></li>
+</ul></li>
+</ul></li>
+<li>Range
+<ul>
+<li><code>range</code> form of the <code>for</code> loop iterates over a slice or map.</li>
+<li>2 values are returned <em>index</em>, <em>copy of the element at that index</em></li>
+</ul></li>
+<li>can skip the return value by assigning to <code>_</code> either of return values by <code>range</code>
+<ul>
+<li><code>for i, _ := range pow</code></li>
+<li><code>for _, value := range pow</code></li>
+<li>if only index is required
+<ul>
+<li><code>for i := range pow</code></li>
+</ul></li>
+<li><div class="sourceCode" id="cb42"><pre class="sourceCode go"><code class="sourceCode go"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>  <span class="kw">package</span> main</span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">import</span> <span class="st">&quot;fmt&quot;</span></span>
+<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a>  <span class="kw">func</span> main<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb42-4"><a href="#cb42-4" aria-hidden="true" tabindex="-1"></a>    pow <span class="op">:=</span> <span class="op">[]</span><span class="dt">int</span><span class="op">{</span><span class="dv">1</span><span class="op">,</span> <span class="dv">2</span><span class="op">,</span> <span class="dv">4</span><span class="op">,</span> <span class="dv">8</span><span class="op">,</span> <span class="dv">16</span><span class="op">,</span> <span class="dv">32</span><span class="op">,</span> <span class="dv">64</span><span class="op">,</span> <span class="dv">128</span><span class="op">}</span></span>
+<span id="cb42-5"><a href="#cb42-5" aria-hidden="true" tabindex="-1"></a>    <span class="kw">for</span> i<span class="op">,</span> v <span class="op">:=</span> <span class="kw">range</span> pow <span class="op">{</span></span>
+<span id="cb42-6"><a href="#cb42-6" aria-hidden="true" tabindex="-1"></a>      mt<span class="op">.</span>Printf<span class="op">(</span><span class="st">&quot;2**%d = %d</span><span class="ch">\n</span><span class="st">&quot;</span><span class="op">,</span> i<span class="op">,</span> v<span class="op">)</span></span>
+<span id="cb42-7"><a href="#cb42-7" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb42-8"><a href="#cb42-8" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span></code></pre></div></li>
+</ul></li>
+</ul>
+<h1 id="questions-and-excercises">Questions and Excercises</h1>
+<ul>
+<li>Print the powers of 2 (i.e 2**i) for i=0 to 10.
+<ul>
+<li>Hints: shift the bits of 1 by N</li>
+<li>Hints: use range</li>
+<li><div class="sourceCode" id="cb43"><pre class="sourceCode go"><code class="sourceCode go"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>  <span class="kw">package</span> main</span>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">import</span> <span class="st">&quot;fmt&quot;</span></span>
+<span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a>  <span class="kw">func</span> main<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb43-4"><a href="#cb43-4" aria-hidden="true" tabindex="-1"></a>    pow <span class="op">:=</span> <span class="bu">make</span><span class="op">([]</span><span class="dt">int</span><span class="op">,</span> <span class="dv">10</span><span class="op">)</span></span>
+<span id="cb43-5"><a href="#cb43-5" aria-hidden="true" tabindex="-1"></a>    <span class="kw">for</span> i <span class="op">:=</span> <span class="kw">range</span> pow <span class="op">{</span></span>
+<span id="cb43-6"><a href="#cb43-6" aria-hidden="true" tabindex="-1"></a>      pow<span class="op">[</span>i<span class="op">]</span> <span class="op">=</span> <span class="dv">1</span> <span class="op">&lt;&lt;</span> <span class="dt">uint</span><span class="op">(</span>i<span class="op">)</span> <span class="co">// == 2**i</span></span>
+<span id="cb43-7"><a href="#cb43-7" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb43-8"><a href="#cb43-8" aria-hidden="true" tabindex="-1"></a>    <span class="kw">for</span> _<span class="op">,</span> value <span class="op">:=</span> <span class="kw">range</span> pow <span class="op">{</span></span>
+<span id="cb43-9"><a href="#cb43-9" aria-hidden="true" tabindex="-1"></a>      fmt<span class="op">.</span>Printf<span class="op">(</span><span class="st">&quot;%d</span><span class="ch">\n</span><span class="st">&quot;</span><span class="op">,</span> value<span class="op">)</span></span>
+<span id="cb43-10"><a href="#cb43-10" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb43-11"><a href="#cb43-11" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span></code></pre></div></li>
+<li>Given a sorted array of unique integers, write a method that takes this array and returns an array of ranges of contiguous values. Each range is an array with the start and end integers (inclusive) of the contiguous portions of the original array
+<ul>
+<li><div class="sourceCode" id="cb44"><pre class="sourceCode go"><code class="sourceCode go"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a>  Input<span class="op">:</span> <span class="op">[</span><span class="dv">2</span><span class="op">,</span> <span class="dv">3</span><span class="op">,</span> <span class="dv">6</span><span class="op">,</span> <span class="dv">7</span><span class="op">,</span> <span class="dv">8</span><span class="op">,</span> <span class="dv">9</span><span class="op">,</span> <span class="dv">14</span><span class="op">,</span> <span class="dv">15</span><span class="op">,</span> <span class="dv">16</span><span class="op">,</span> <span class="dv">17</span><span class="op">]</span></span>
+<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a>  Output<span class="op">:</span> <span class="op">[[</span><span class="dv">2</span><span class="op">,</span> <span class="dv">3</span><span class="op">],</span> <span class="op">[</span><span class="dv">6</span><span class="op">,</span> <span class="dv">9</span><span class="op">],</span> <span class="op">[</span><span class="dv">14</span><span class="op">,</span> <span class="dv">17</span><span class="op">]]</span></span>
+<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a>  Input<span class="op">:</span> <span class="op">[</span><span class="dv">8</span><span class="op">,</span> <span class="dv">9</span><span class="op">]</span></span>
+<span id="cb44-4"><a href="#cb44-4" aria-hidden="true" tabindex="-1"></a>  Output<span class="op">:</span> <span class="op">[[</span><span class="dv">8</span><span class="op">,</span> <span class="dv">9</span><span class="op">]]</span></span></code></pre></div></li>
+</ul></li>
+</ul></li>
+<li>Implement Pic. It should return a slice of length dy, each element of which is a slice of dx 8-bit unsigned integers. When you run the program, it will display your picture, interpreting the integers as grayscale (well, bluescale) values.
+<ul>
+<li>The choice of image is up to you. Interesting functions include (x+y)/2, x*y, and x^y.</li>
+<li>(You need to use a loop to allocate each []uint8 inside the [][]uint8.)</li>
+<li>(Use uint8(intValue) to convert between types.)</li>
+</ul></li>
+</ul>
+
+</body>
+</html>

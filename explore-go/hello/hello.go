@@ -16,6 +16,8 @@ func main() {
 
 	explore_slice()
 
+	explore_map()
+
 }
 func explore_multiple_return_values() {
 	message, err := greetings.Hello("Rambo")
@@ -23,6 +25,18 @@ func explore_multiple_return_values() {
 		log.Fatal(err)
 	}
 	fmt.Println(message)
+
+}
+
+func explore_map() {
+	//in: list of names
+	//out: map of greetings and name
+	names := []string{"John", "Jani", "Janardhan"}
+	messages, err := greetings.Hellos(names)
+	if err != nil {
+		log.Fatal(err)
+	}
+	fmt.Println(messages)
 
 }
 
