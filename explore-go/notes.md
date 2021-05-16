@@ -5,6 +5,8 @@
   -   Code > Preferences > Extensions > Go 0.24.1
   - After install, VS  Code will ask to install tools, install all
    - (VS Studio Code extensions Commands)[https://github.com/golang/vscode-go/blob/master/docs/commands.md#commands]
+# Quick Ref Links
+- [fmt format verbs](https://golang.org/pkg/fmt/)
 
 # Hello World Program
 - ```shell script
@@ -28,7 +30,7 @@
       import "fmt"
     
       func main() {
-	    fmt.Println("Hello World!")
+        fmt.Println("Hello World!")
       }
       ```
     - `import "fmt"` is a standard text format package, including printing to console.
@@ -41,11 +43,11 @@
     - ```go
       package main
       import (
-	    "fmt"
+        "fmt"
         "rsc.io/quote"
       )
       func main() {
-	    fmt.Println(quote.Go())
+        fmt.Println(quote.Go())
       }
       ```
     - ```shell script
@@ -63,12 +65,12 @@
   - ```go
       package greetings
       import (
-	      "fmt"
+          "fmt"
       )
 
       func Hello(name string) string {
-	      message := fmt.Sprintf("Hi, %v. Welcome!", name)
-	      return message
+          message := fmt.Sprintf("Hi, %v. Welcome!", name)
+          return message
       }
     ```
   - import the `example.com/greetings` in `hello.go`
@@ -82,9 +84,9 @@
         )
 
       func main() {
-	      //fmt.Println(quote.Go())
-	      message := greetings.Hello("Rambo")
-	      fmt.Println(message)
+          //fmt.Println(quote.Go())
+          message := greetings.Hello("Rambo")
+          fmt.Println(message)
       }
       ```
     - `example.com/greetings` is not in _pkg.go.dev_ but local. we need to fix this
@@ -126,21 +128,21 @@
   - Hack:Code > Preferences > Settings > extensions > go > search "codeActionsOnSave" > edit in settings.json
     - ```json
       {
-	      "folders": [
-		      {
-			      "path": "explore-go"
-		      }
-	      ],
-	      "settings": {
-		      "go.formatTool": "gofmt",
-		      "[go]": {
-			      "editor.insertSpaces": false,
-			      "editor.formatOnSave": true,
-			      "editor.codeActionsOnSave": {
-				      "source.organizeImports": false
-			      }
-		      }
-	      }
+          "folders": [
+              {
+                  "path": "explore-go"
+              }
+          ],
+          "settings": {
+              "go.formatTool": "gofmt",
+              "[go]": {
+                  "editor.insertSpaces": false,
+                  "editor.formatOnSave": true,
+                  "editor.codeActionsOnSave": {
+                      "source.organizeImports": false
+                  }
+              }
+          }
       }
       ```
   - ref: https://stackoverflow.com/questions/48124565/why-does-vscode-delete-golang-source-on-save
@@ -284,7 +286,7 @@
   ```go
   go test
   PASS
-  ok  	example.com/greetings	0.504s 
+  ok    example.com/greetings   0.504s 
   ```
   ```go
   go test -v
@@ -293,7 +295,7 @@
   === RUN   TestHelloEmpty
   --- PASS: TestHelloEmpty (0.00s)
   PASS
-  ok  	example.com/greetings	0.236s
+  ok    example.com/greetings   0.236s
   ```
 
 ## Compile and Install the application
@@ -451,7 +453,7 @@
 - [Go's Declaration Syntax](https://blog.golang.org/declaration-syntax)
   ```go
   func add(x int, y int) int {
-	return x + y
+    return x + y
   }
   ```
 - if 2 or more consicutive args in a fung share the same type, you can omit type  from all except last.
@@ -463,7 +465,7 @@
 - function can return any number of results.
   ```go
   func swap(x, y string) (string, string) {
-	return y, x
+    return y, x
   }
   ```
 - Named return values
@@ -472,9 +474,9 @@
   - return statement without arguments returns the named returns values. This is    called the _Naked return_
     ```go
     func split(sum int) (x, y int) {
-	x = sum * 4 / 9
-	y = sum - x
-	return
+    x = sum * 4 / 9
+    y = sum - x
+    return
     }
     ```
 - Variables
@@ -576,7 +578,7 @@
        case "linux":
          fmt.Println("Linux.")
        default:
-	 fmt.Printf("%s.\n", os)
+     fmt.Printf("%s.\n", os)
      }
      ```
    - cases need not be constant and values need not be integers
@@ -586,11 +588,11 @@
        t := time.Now()
        switch {
          case t.Hour() < 12:
-	   fmt.Println("Good morning!")
-	case t.Hour() < 17:
-	  fmt.Println("Good afternoon.")
-	default:
-	  fmt.Println("Good evening.")
+       fmt.Println("Good morning!")
+    case t.Hour() < 17:
+      fmt.Println("Good afternoon.")
+    default:
+      fmt.Println("Good evening.")
        }
      }
      '''
@@ -819,7 +821,7 @@
         // We can add more than one element at a time.
         s = append(s, 2, 3, 4)
         printSlice(s) //len=5 cap=6 [0 1 2 3 4] //something funny here, cap is not 5 but 6, looks like append uses some logic
-	//https://github.com/golang/go/blob/87e48c5afdcf5e01bb2b7f51b7643e8901f4b7f9/src/runtime/slice.go#L100-L112
+    //https://github.com/golang/go/blob/87e48c5afdcf5e01bb2b7f51b7643e8901f4b7f9/src/runtime/slice.go#L100-L112
       }
       func printSlice(s []int) {
         fmt.Printf("len=%d cap=%d %v\n", len(s), cap(s), s)
@@ -866,49 +868,98 @@
   ```
 - map Literals similar to struct literals. Top level Type name can be omitted
   -  ```go
-	 var m = map[string]Vertex{
-	   "Bell Labs": Vertex{40.68433, -74.39967,},
-	   "Google": Vertex{37.42202, -122.08408,},
+     var m = map[string]Vertex{
+       "Bell Labs": Vertex{40.68433, -74.39967,},
+       "Google": Vertex{37.42202, -122.08408,},
      }
-	 ```
-	 ```go
-	  var m = map[string]Vertex{
-	    "Bell Labs":{40.68433, -74.39967},
-	     "Google": Vertex{37.42202, -122.08408},
+     ```
+     ```go
+      var m = map[string]Vertex{
+        "Bell Labs":{40.68433, -74.39967},
+         "Google": Vertex{37.42202, -122.08408},
       }
-	  ```
+      ```
 - Mutating maps
   - insert/update, `m[key] = value`
   - retrieve, `elem = m[key]`
   - delete, `delete(m, key)`
   - check for key, `elem, ok :=  m[key]`
-	- key present, `ok` is `true` else `false`
-	- if key not present, elem is `nil`
+    - key present, `ok` is `true` else `false`
+    - if key not present, elem is `nil`
   - ```go
-	package main
+    package main
     import "fmt"
         
     func main() {
-	  m := make(map[string]int)
-      	  	
-	  m["Answer"] = 42
-	  fmt.Println("The value:", m["Answer"]) //The value: 42
+      m := make(map[string]int)
+            
+      m["Answer"] = 42
+      fmt.Println("The value:", m["Answer"]) //The value: 42
         
-	  m["Answer"] = 48
-	  fmt.Println("The value:", m["Answer"]) //The value: 48
+      m["Answer"] = 48
+      fmt.Println("The value:", m["Answer"]) //The value: 48
       
-	  delete(m, "Answer")
-	  fmt.Println("The value:", m["Answer"])//The value: 0
+      delete(m, "Answer")
+      fmt.Println("The value:", m["Answer"])//The value: 0
         
-	  v, ok := m["Answer"]
-	  fmt.Println("The value:", v, "Present?", ok) //The value: 0 Present? false
+      v, ok := m["Answer"]
+      fmt.Println("The value:", v, "Present?", ok) //The value: 0 Present? false
     }
-	```
+    ```
   - [Excercise: Maps](#excercise-maps-1)
 
 ### Functions
 - Functions are values too
 - Function values used as function arguments and return values
+  - ```go
+    package main
+      
+    import (
+      "fmt"
+      "math"
+    )
+    
+    func compute(fn func(float64, float64) float64) float64 {
+      return fn(3, 4)
+    }
+    
+    func main() {
+      hypot := func(x, y float64) float64 {
+        return math.Sqrt(x*x + y*y)
+      }
+      
+      fmt.Println(hypot(5, 12)) //13
+      
+      fmt.Println(compute(hypot))  //5
+      fmt.Println(compute(math.Pow)) //81
+    }
+    ```
+  - Function arguments are passed by value (unless it a pointer)
+- Function Closures
+  - A closure is a function value that references variables from outside its body.
+  - The function may access and assign to the referenced variables
+  - ```go
+    func adder() func(int) int {
+      sum := 0
+      return func(x int) int {
+        sum += x
+        return sum
+      }
+    }
+    func testClosure() {
+      pos, neg := adder(), adder()
+      for i := 0; i < 10; i++ {
+        fmt.Println(pos(i), neg(-2*i))
+      }
+    }
+    ```
+  - (Excercise: Closure)[#ex-closure-1]
+
+### Methods
+- No classes in GoLang
+- Methods can be defined on types
+- Method is a function with a receiver argument `func (v Vertex) Abs() float64 {`
+  - the `Abs` method has a receiver of type `Vertex` named `v`
 - ```go
   package main
   
@@ -917,75 +968,541 @@
     "math"
   )
   
-  func compute(fn func(float64, float64) float64) float64 {
-    return fn(3, 4)
+  type Vertex struct {
+    X, Y float64
+  }
+  
+  func (v Vertex) Abs() float64 {
+    return math.Sqrt(v.X*v.X + v.Y*v.Y)
   }
   
   func main() {
-    hypot := func(x, y float64) float64 {
-        return math.Sqrt(x*x + y*y)
-    }
-    fmt.Println(hypot(5, 12)) //13
-    
-    fmt.Println(compute(hypot))  //5
-    fmt.Println(compute(math.Pow)) //81
+    v := Vertex{3, 4}
+    fmt.Println(v.Abs())
   }
   ```
-- Function Closures
-  - A closure is a function value that references variables from outside its body.
-  - The function may access and assign to the referenced variables
+- Can declare a method on non-struct types too.
   - ```go
-    func adder() func(int) int {
-	  sum := 0
-	  return func(x int) int {
-		sum += x
-		return sum
-	  }
+    package main
+    import (
+      "fmt"
+      "math"
+    )
+    type MyFloat float64
+    
+    func (f MyFloat) Abs() float64 {
+      if f < 0 {
+        return float64(-f)
+      }
+      return float64(f)
     }
-	func testClosure() {
-      pos, neg := adder(), adder()
-	  for i := 0; i < 10; i++ {
-		fmt.Println(pos(i), neg(-2*i))
-	  }
+    
+    func main() {
+      f := Myfloat(-math.Sqrt2)
+      fmt.Println(f.Abs())
     }
     ```
-  - (Excercise: Closure)[#ex-closure-1]
+- can declare methods with pointer receivers
 
-### Methods
-- No classes in GoLang
-- Methods can be defined on types
-- Method is a function with a receiver adgument
+### Pointer Receivers 
+- The receiver type has the literal syntax `*T` for some type `T`. (Also, `T` cannot itself be a pointer such as `*int`.)
+  - ```go
+    package main
+    
+    import (
+      "fmt"
+      "math"
+    )
+    
+    type Vertex struct {
+      X, Y float64
+    }
+    
+    func (v Vertex) Abs() float64 {
+      return math.Sqrt(v.X*v.X + v.Y*v.Y)
+    }
+
+    //note: Receicver is a pointer to type Vertex 
+    //with pointer receivers the original v values (v.X and v.Y can be changed)
+    //if the pointer i.e * was removed the v.Scale(10) has no affect on v.Abs(), it would return '5'
+    func (v *Vertex) Scale(f float64) {
+      v.X = v.X * f
+      v.Y = v.Y * f
+    }
+
+    func main() {
+      v := Vertex{3, 4}
+      v.Scale(10)
+      fmt.Println(v.Abs()) //50
+    }
+    ```
+    ```go
+    package main
+    
+    import (
+      "fmt"
+      "math"
+    )
+    
+    type Vertex struct {
+      X, Y float64
+    }
+    
+    func (v Vertex) Abs() float64 {
+      return math.Sqrt(v.X*v.X + v.Y*v.Y)
+    }
+
+    //note receicver is not a pointer to type Vertex
+    func (v Vertex) Scale(f float64) {
+      v.X = v.X * f
+      v.Y = v.Y * f
+    }
+
+    func main() {
+      v := Vertex{3, 4}
+      v.Scale(10)
+      fmt.Println(v.Abs()) //5
+    }
+    
+    ```
+  - `Abs` and `Scale` methods written as functions
+    - ```go
+      package main
+      
+      import (
+        "fmt"
+        "math"
+      )
+      
+      type Vertex struct {
+        X, Y float64
+      }
+      
+      func Abs(v Vertex) float64 {
+        return math.Sqrt(v.X*v.X + v.Y*v.Y)
+      }
+      
+      func Scale(v *Vertex, f float64) {
+        v.X = v.X * f
+        v.Y = v.Y * f
+      }
+      
+      func main() {
+        v := Vertex{3, 4}
+        Scale(&v, 10)
+        fmt.Println(Abs(v))
+      } 
+      ```
+- Methods and Pointer indiriction
+  - ```go
+    package main
+    import "fmt"
+    type Vertex struct {
+      X, Y float64
+    }
+    func (v *Vertex) Scale(f float64) {
+      v.X = v.X * f
+      v.Y = v.Y * f
+    }
+    func ScaleFunc(v *Vertex, f float64) {
+      v.X = v.X * f
+      v.Y = v.Y * f
+    }
+    func main() {
+      v := Vertex{3, 4}
+      v.Scale(2)
+      ScaleFunc(&v, 10)
+     
+      p := &Vertex{4, 3}
+      p.Scale(3)
+      ScaleFunc(p, 8)
+      
+      fmt.Println(v, p)
+    }
+    ```
+    - Functions with __pointer arguments__ must take a pointer
+      - ```go
+        var v Vertex
+        ScaleFunc(v, 5) //compile error
+        ScaleFunc(&v, 5) //OK
+        ```
+    - Methods with __pointer receivers__ take either a value or a pointer as the receiver when they are caled.
+      - ```go
+        var v Vertex
+        v.Scale(5) //OK //GO interprets it as (&v).Scale(5)
+        p := &v
+        p.Scale(5) //OK
+        ```
+  - ```go
+    package main
+    import (
+      "fmt"
+      "math"
+    )
+    type Vertex struct {
+      X, Y float64
+    }
+    func (v Vertex) Abs() float64 {
+      return math.Sqrt(v.X*v.X + v.Y*v.Y)
+    }
+    func AbsFunc(v Vertex) float64 {
+      return math.Sqrt(v.X*v.X + v.Y*v.Y)
+    }
+    func main() {
+      v := Vertex{3, 4}
+      fmt.Println(v.Abs())
+      fmt.Println(AbsFunc(v))
+      
+      p := &Vertex{4, 3}
+      fmt.Println(p.Abs())
+      fmt.Println(AbsFunc(*p))
+    }
+    ```
+    - functions that take a value argument must take a value of tht specific type.
+      - ```go
+        var v Vertex
+        fmt.Println(AbsFunc(v))  // OK
+        fmt.Println(AbsFunc(&v)) // Compile error!
+        ```
+    - Methods with value receiver take either a value or a pointer when they are called.
+      - ```go
+        var v Vertex
+        fmt.Println(v.Abs()) // OK
+        p := &v
+        fmt.Println(p.Abs()) // OK  
+        ```
+- Choosing a value or pointer receiver
+  - 2 reasons why pointer receivers are better than value receivers.
+    - method can modify the value that the receiver points to.
+	- avoiding copying is efficient, especially if the struct is large.
+  - In general, all methods on a given type should have either value or pointer receivers, but not a mixture of both.
+  - ```go
+    package main
+	import (
+	  "fmt"
+	  "math"
+    )
+         
+    type Vertex struct {
+    	X, Y float64
+    }
+    
+    func (v *Vertex) Scale(f float64) {
+    	v.X = v.X * f
+    	v.Y = v.Y * f
+    }
+    
+    func (v *Vertex) Abs() float64 {
+    	return math.Sqrt(v.X*v.X + v.Y*v.Y)
+    }
+    
+    func main() {
+    	v := &Vertex{3, 4}
+    	fmt.Printf("Before scaling: %+v, Abs: %v\n", v, v.Abs())
+    	v.Scale(5)
+    	fmt.Printf("After scaling: %+v, Abs: %v\n", v, v.Abs())
+    } 
+    ```
+
+### Interfaces
+- set of method signatures
+- A value of interface type can hold any value that implements those methods.
+- Interfaces are implemented implicitly. There is no explicit "implements" keyword
+- Implicit interfaces decouple the definition of an interface from its implementation, which could then appear in any package without prearrangement.
 - ```go
   package main
   
   import (
-    "fmt"
-	"math"
+  	"fmt"
+  	"math"
   )
-
-  type Vertex struct {
-	X, Y float64
+  
+  type Abser interface {
+  	Abs() float64
   }
-
-func (v Vertex) Abs() float64 {
-  - (Excercise: Closure)[#ex-closure-1]u
-	return math.Sqrt(v.X*v.X + v.Y*v.Y)
-}
-
-func main() {
-	v := Vertex{3, 4}
-	fmt.Println(v.Abs())
-}
+  
+  func main() {
+  	var a Abser
+  	f := MyFloat(-math.Sqrt2)
+  	v := Vertex{3, 4}
+  
+  	a = f  // a MyFloat implements Abser
+	fmt.Println(a.Abs()) //1.41421...
+  	
+	a = &v // a *Vertex implements Abser
+    fmt.Println(a.Abs())  //5
+	
+  	// In the following line, v is a Vertex (not *Vertex)
+  	// and does NOT implement Abser.
+  	//a = v
+  }
+  
+  type MyFloat float64
+  
+  func (f MyFloat) Abs() float64 {
+  	if f < 0 {
+  		return float64(-f)
+  	}
+  	return float64(f)
+  }
+  
+  type Vertex struct {
+  	X, Y float64
+  }
+  
+  func (v *Vertex) Abs() float64 {
+  	return math.Sqrt(v.X*v.X + v.Y*v.Y)
+  }
+  ```
+- Under the hood, interface values can be thought of as a tuple of a value and a concrete type: `(value, type)`. Interface holds the value of a specific underlying concrete type.
+- Calling a method on an interface value executes the method of the same name on its underlying type.
+- _nil receiver interface_: Interface values with `nil` underlying values.
+  - ```go
+    package main
+	
+	import "fmt"
+	
+    type I interface {
+	  M()
+	}
+	
+	type T struct {
+	  S string
+	}
+	
+	func (t *T) M() {
+	 if t == nil {
+		fmt.Println("<nil>")
+		return
+	 }
+	 fmt.Println(t.S)
+	}
+	
+	func main() {
+		var i I
+		var t *T
+		i = t //initilized with 'nil' receiver.
+		describe(i) //(<nil>, *main.T)
+		i.M() //<nil>
+		
+		i = &T{"hello"}
+		describe(i)  //&<"hello", *main.T
+		i.M() "hello"
+		
+	}
+	
+	func describe() {
+		fmt.Printf("(%v, %T)\n", i, i)
+	}
+    ```
+  - In some languages this will trigger a null pointer exception
+  - In Go it is common to write methods that gracefully handle being called with a nil receiver (as with the method M in this example.) 
+- _nil interface_: holds neither value nor concrete Type.
+  - ```go
+    package main
+	
+	import "fmt"
+	
+    type I interface {
+	  M()
+	}
+	
+	func main() {
+		var i I
+		describe(i) //(<nil>, <nil>)
+		i.M() 
+		//panic: runtime error: invalid memory address or nil pointer dereference. 
+		//[signal SIGSEGV: segmentation violation...
+	}
+	
+	func describe() {
+		fmt.Printf("(%v, %T)\n", i, i)
+	}
+    ```
+ - _empty interface_: interface that specifies zero methods. using `interface{}`
+   - ```go
+     package main
+	 import "fmt"
+	 
+	 func main() {
+		var i interface{}
+		describe(i) // (<nil>, <nil>)
+	
+		i = 42
+		describe(i) //(42, int)
+		
+		i = "hello"
+		describe(i) //{"hello", string}
+	 }
+	 func describe() {
+		fmt.Printf("(%v, %T)\n", i, i)
+	 }
+     ```
+- Type assertion of interface `t = i.(T)` `t, ok = i.(T)`
+  - interface value `i` holds concrete type `T` and assigns the underlying value to variable `t`
+  - To test whether an interface value holds a specific type, a type assertion can return two values: the underlying value and a boolean value that reports whether the assertion succeeded.
+  - ```go
+    var i interface{} = 'hello'
+	
+	s := i.(string)
+	fmt.Println(s) //hello
+	
+	s, ok := i.(string)
+	fmt.Println(s, ok) //hello true
+	
+	f, ok := i.(float64)
+	fmt.Println(s, ok) //0 false
+	
+	f := i.(float64)
+	fmt.Println(s) // panic: interface conversion: interface {} is string, not float64
+    ```
+	
+### Type Switches
+- A _type switch_ is a construct that permits several type assertions in series.A
+- its like a regular switch statement but the cases are _types_ not values.
+- The declaration in a type switch has the same syntax as a type assertion `i.(T)`, but the specific type `T` is replaced with the keyword `type`.
+- ```go
+  package main
+  
+  import "fmt"
+  
+  func do (i interface{}) {
+    switch v := i.(type) { //Note:- its not 'T' but the keyword 'type' 
+	case int:
+		fmt.Printf("Twice %v is %v\n", v, v*2)
+	case string:
+	    fmt.Printf("%q is %v bytes long\n", v, len(v))
+	default:
+	  fmt.Printf("type %T Not handled\n", v)
+  }
+  
+  func main() {
+    do(21) //Twice 21 is 42
+	do("hello") //"hello" is 5 bytes long
+	do(true) //type bool Not handled
+  }
   ```
 
+### Stringers
+- `Stringer` interface is provided by `fmt` package
+  - ```go
+    type Stringer interface {
+	  String() string
+    }
+    ```
+- is a type that can describe itself as a string. ( think of it like a toString() in java)
+- ```go
+  package main
+  import "fmt"
+  
+  type Person struct {
+    Name string
+	Age  int
+  }
+  
+  func (p Person) String() string {
+	  return fmt.Sprintf("%v (%v years)", p.Name, p.Age)
+  }
+  
+  func main() {
+    a := Person("Arthur Dent", 42)
+	z := Person("Zaphod Beeblebrox" , 9001)
+	fmt.Println(a, z)
+  }
+  ```
+- [Excercise Stringers](#ex-stringers-1)
 
+###  Errors
+- Similar to `fmt.Stringer` there is `fmt.Error` interface.
+  - ```go
+    type error interface {
+	  Error() string
+	}
+    ```
+  - function often return error value, and the calling code should handle them, by checking for nil
+  - ```go
+	i, err := strconv.Atoi("42")
+	if err != nil {
+		fmt.Println("couldn't convert number: %v\n"), err)
+		return
+	}
+	fmt.Println("onverted number: %v\n", i)
+    ```
+  - Simple Error handling
+    - ```go
+	  package main
+      
+      import "golang.org/x/tour/pic"
+      
+      import (
+      	"fmt"
+      	"strings"
+      	"time"
+      )
+      
+      	  //--- Simple Custom Error handling
+      type MyError struct {
+        When time.Time
+        What string
+      }
+      
+      func (e *MyError) Error() string {
+        return fmt.Sprintf("at %v, %s", e.When, e.What)
+      }
+      
+      func run() error {
+      	return &MyError{
+      		time.Now(), "it didn't work",
+      	}
+      }
+      
+      func testSimpleError() {
+      	if err := run(); err != nil {
+      		fmt.Println(err) //at 2021-05-15 08:23:24.362591 +0530 IST m=+0.000225390, it didn't work
+      	}
+      }
+	  ```
+  - [Excercise Errors](#ex-errors-1)
+  
+## Readers
+- `io` package specifies `io.Reader`
+- Reperesents the read end of stream data.
+- Go std lib has many implementations of `io.Reader`
+  - files, network connections, compressors, ciphers, etc..
+- `func (T) Read(b []byte) (n int, err error)`
+  - populates the given byte slice
+  - returns number of bytes populated and an error value
+  - returns an io.EOF error when stream ends
+- Reading  bytes from a string
+  - ```go
+    package main
+	
+	import (
+		"fmt"
+		"io"
+		"strings"
+	)
+	
+    func main() {
+	  r := strings.NewReader("Hello, Reader!")
+	  b := make([]byte, 8)
+	  for {
+		n, err := r.Read(b)
+		fmt.Printf("n = %v err = %v b = %v\n", n, err, b[:n])
+		fmt.Printf("b[:n] = %q\n", b[:n])
+		//%q	a single-quoted character literal safely escaped with Go syntax.
+		if err == io.EOF {
+			break
+		}
+	  }
+    }
+    ```
+- [Excercise Readers](ex-readers-1)
 
 # Questions and Excercises
 
 ### ex-range-1
-- Print the powers of 2 (i.e 2**i) for i=0 to 10.
-  - Hints: shift the bits of 1 by N
-  - Hints: use range
+- _Print the powers of 2 (i.e 2**i) for i=0 to 10. Hint1: shift the bits of 1 by N. Hint1: use range_
   - ```go
     package main
     import "fmt"
@@ -999,16 +1516,13 @@ func main() {
       }
     }
     ```
-  - Given a sorted array of unique integers, write a method that takes this array and returns an array of ranges of contiguous values. Each range is an array with the start and end integers (inclusive) of the contiguous portions of the original array
-    - ```go
-	  Input: [2, 3, 6, 7, 8, 9, 14, 15, 16, 17]
-	  Output: [[2, 3], [6, 9], [14, 17]]
-	  Input: [8, 9]
-	  Output: [[8, 9]]
-	  ```
+  
+- _Given a sorted array of unique integers, write a method that takes this array and returns an array of ranges of contiguous values. Each range is an array with the start and end integers (inclusive) of the contiguous portions of the original array_
+    - `Input: [2, 3, 6, 7, 8, 9, 14, 15, 16, 17] Output: [[2, 3], [6, 9], [14, 17]]`
+	- `Input: [8, 9] Output: [[8, 9]]`
 
 ### ex-slice-1
-- Implement Pic. It should return a slice of length dy, each element of which is a slice of dx 8-bit unsigned integers. When you run the program, it will display your picture, interpreting the integers as grayscale (well, bluescale) values.
+- _Implement Pic. It should return a slice of length dy, each element of which is a slice of dx 8-bit unsigned integers. When you run the program, it will display your picture, interpreting the integers as grayscale (well, bluescale) values._
   - The choice of image is up to you. Interesting functions include (x+y)/2, x*y, and x^y.
   - (You need to use a loop to allocate each []uint8 inside the [][]uint8.)
   - (Use uint8(intValue) to convert between types.)
@@ -1036,7 +1550,7 @@ func main() {
   ```
 
 ### ex-maps-1
-- Implement WordCount. It should return a map of the counts of each “word” in the string s. The wc.Test function runs a test suite against the provided function and prints success or failure._You might find strings.Fields helpful._
+- _Implement WordCount. It should return a map of the counts of each “word” in the string s. The wc.Test function runs a test suite against the provided function and prints success or failure. You might find strings.Fields helpful._
 - ```go
   package main
   
@@ -1062,11 +1576,11 @@ func main() {
   ```
 
 ### ex-closure-1
-- Implement a fibonacci function that returns a function (a closure) that returns successive fibonacci numbers (0, 1, 1, 2, 3, 5, ...).
+- _Implement a fibonacci function that returns a function (a closure) that returns successive fibonacci numbers (0, 1, 1, 2, 3, 5, ...)._
   - ```go
-	package main
-	import "fmt"
-	
+    package main
+    import "fmt"
+    
     func fibonacci() func() int {
       j := 0
       k := 1
@@ -1094,3 +1608,96 @@ func main() {
       }
     }
     ```
+
+### ex-stringers-1
+- _Make the IPAddr type implement fmt.Stringer to print the address as a dotted quad._
+- ```go
+  package main
+  
+  import "fmt"
+  
+  type IPAddr [4]byte
+  
+  // TODO: Add a "String() string" method to IPAddr.
+  func (ip IPAddr) String() string {
+    return fmt.Sprintf("%d.%d.%d.%d", ip[0], ip[1], ip[2], ip[3])
+  }
+  
+  func main() {
+  	hosts := map[string]IPAddr{
+  		"loopback":  {127, 0, 0, 1},
+  		"googleDNS": {8, 8, 8, 8},
+  	}
+  	for name, ip := range hosts {
+  		fmt.Printf("%v: %v\n", name, ip)
+  	}
+  }
+  ```
+
+### ex-errors-1
+- _Copy your `Sqrt` function from the earlier exercise and modify it to return an `error` value. `Sqrt` should return a non-nil `error` value when given a negative number, as it doesn't support complex numbers. Create a new type `type ErrNegativeSqrt float64` and make it an `error` by giving it a `func (e ErrNegativeSqrt) Error() string` method such that `ErrNegativeSqrt(-2).Error()` returns "cannot Sqrt negative number: -2". Note: A call to fmt.Sprint(e) inside the Error method will send the program into an infinite loop. You can avoid this by converting e first: fmt.Sprint(float64(e)). Why?. Change your `Sqrt` function to return an `ErrNegativeSqrt` value when given a negaive number._
+- ``` go 
+   //--- refactor Sqrt to handle complex numbers
+   type ErrNegativeSqrt float64
+   
+   func (e ErrNegativeSqrt) Error() string {
+   	return fmt.Sprintf("Cannot sqrt negative number:  %f", float64(e))
+   }
+   
+   func Sqrt2(x int) (float64, error) {
+   	delta := float64(x)
+   	z := float64(1)
+   	//z := float64(x)
+   	//z := float64(x / 2)
+   	if x < 0 {
+   		return z, ErrNegativeSqrt(x)
+   	} else {
+   		iterations := 1
+   		for ; math.Abs(delta) > 0.001; iterations++ {
+   			delta = ((z * z) - float64(x)) / (2 * z)
+   			z = z - delta
+   		}
+   		return z, nil
+   	}
+   
+   }
+   
+   func testSqrt2() {
+   	i := 56
+   	sqrt, e := Sqrt2(i)
+   	if e != nil {
+   		fmt.Println(e.Error())
+   	} else {
+   		fmt.Printf("Sqrt of %d is %f", i, sqrt)
+   	}
+   }
+   
+   func main() {
+   	testSqrt2()
+   }
+   ```
+   
+### ex-readers-1
+- _Implement a Reader type that emits an infinite stream of the ASCII character 'A'._
+- ```go
+  package main
+  
+  import (
+  	"golang.org/x/tour/reader"
+   )
+  
+  //--- implement a Reader thet emits stream of Ascii character 'A'
+  // in the Tour of Go the problem statement is ambigous due to the phrase 'infinite stream used'
+  type MyReader struct{}
+  
+  func (r MyReader) Read(b []byte) (int, error) {
+  	for i := range b {
+  		b[i] = 65 //or 'A'
+  	}
+  	return len(b), nil
+  }
+  
+  func main() {
+  	reader.Validate(MyReader{}) //OK!
+  }
+  ```
